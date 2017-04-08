@@ -1,0 +1,1044 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS bug," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="中午的时候，测试人员上报了一个在iOS7的bug，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一个iOS7的bug引发的关于cell的事件处理">
+<meta property="og:url" content="http://yoursite.com/2016/04/20/一个iOS7的bug引发的关于cell的事件处理/index.html">
+<meta property="og:site_name" content="蔡锐炜的小黑屋">
+<meta property="og:description" content="中午的时候，测试人员上报了一个在iOS7的bug，">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutiOS7-bug.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutiOS9.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout11112sadaddasds.jpg">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutE0A18B48-38F1-450E-B376-03C0EAA2EB99.jpg">
+<meta property="og:image" content="http://cdn5.raywenderlich.com/wp-content/uploads/2015/03/angry-desk-flip.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout22321sadsjkaskdgakuj.jpg">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160420.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160420_1.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout3.pic.jpg">
+<meta property="og:updated_time" content="2017-04-08T01:16:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一个iOS7的bug引发的关于cell的事件处理">
+<meta name="twitter:description" content="中午的时候，测试人员上报了一个在iOS7的bug，">
+<meta name="twitter:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutiOS7-bug.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/20/一个iOS7的bug引发的关于cell的事件处理/"/>
+
+
+
+
+
+  <title> 一个iOS7的bug引发的关于cell的事件处理 | 蔡锐炜的小黑屋 </title>
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71ef3e3830d0a0ce2c470e01905752a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蔡锐炜的小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/20/一个iOS7的bug引发的关于cell的事件处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="corzfree">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蔡锐炜的小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一个iOS7的bug引发的关于cell的事件处理
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-20T21:23:06+08:00">
+                2016-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/04/20/一个iOS7的bug引发的关于cell的事件处理/" class="leancloud_visitors" data-flag-title="一个iOS7的bug引发的关于cell的事件处理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>中午的时候，测试人员上报了一个在iOS7的bug，<a id="more"></a>如下：   </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutiOS7-bug.gif" alt="enter image description here">  </p>
+<p>  可以看到，本来点击的是第二项的➕号，但是，却变成第一项增加了，在模拟器上跑了一次：  </p>
+<p>  <img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutiOS9.gif" alt="enter image description here">    </p>
+<p>  正常运行，没有任何问题，应该是系统的原因造成的。  </p>
+<p>  刚好最近弄了部iphone4，跑着iOS7的系统，重新跑了一次，果然，bug重现了，看下我们的代码：</p>
+<pre><code>cell.changeCarNumView.incrementCallback = ^(PKYStepper *stepper, float newValue){
+            @strongify(self);
+            if (!self) return;
+
+            AfternoonTeaShopCell *superCell = (AfternoonTeaShopCell *)stepper.superview.superview;
+            NSIndexPath *indexPath = [self.kitchenDetailsView.tableView indexPathForCell:superCell];
+
+            KitchenDetailsTodayMenuModel *model = self.todayMenuArray[indexPath.row];
+            model.selectCount = newValue;
+
+            [self.kitchenDetailsView.tableView reloadRowAtIndexPath:indexPath withRowAnimation:UITableViewRowAnimationNone];
+        };  
+</code></pre><p>  这里，<code>stepper</code>是加在<code>AfternoonTeaShopCell</code>的<code>contentView</code>里面，所以这里可以使用<code>stepper.superview.superview</code>来获取<code>cell</code>，然后获取<code>cell</code>相对应的<code>indexPath</code>，改变数量，刷新当前行.  </p>
+<p>   这代码在iOS8(包括iOS8)运行良好，但是在iOS7却出现了问题，加了个断点，当我们点击加号的时候：  </p>
+<p>   <img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout11112sadaddasds.jpg" alt="enter image description here">     </p>
+<p>   <img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutE0A18B48-38F1-450E-B376-03C0EAA2EB99.jpg" alt="enter image description here"></p>
+<p>What the fuck！！！在当初你告诉我，见过你父亲和你爷爷就可以娶到你，此时此刻，当我历尽千辛万苦，来到你爷爷面前，桃花依旧，人不再，你爷爷说要再见过你曾祖父才行。</p>
+<p>  <img src="http://cdn5.raywenderlich.com/wp-content/uploads/2015/03/angry-desk-flip.png" alt="enter image description here"></p>
+<p>从上面的截图可以看出，在iOS7上和iOS9上，UITableViewCell的层次已经发生了改变，在iOS7上，我们可以看到多了一层<code>UITableViewCellScrollvView</code>，所以在iOS7上我们需要使用三个<code>superview</code>来获取<code>cell</code>，<a href="http://www.tekuba.net/wap.asp?act=View&amp;id=308" target="_blank" rel="external">iOS7 UITableViewCell的变化
+</a>也阐述了iOS6－iOS7UITableViewCell视图层次的改变，但是在iOS8之后又变回了，所以:  </p>
+<pre><code>if (IOS_VERSION &gt;= 7.0 &amp;&amp; IOS_VERSION &lt; 8.0) {
+    AfternoonTeaShopCell *superCell = (AfternoonTeaShopCell *)stepper.superview.superview.superview;
+}else{
+    AfternoonTeaShopCell *superCell = (AfternoonTeaShopCell *)stepper.superview.superview;
+}    
+</code></pre><p> 当然，我们也可以使用<a href="http://stackoverflow.com/questions/6930026/tableviewindexpathforcell-returns-nil" target="_blank" rel="external">stackoverflow</a>上的一种方法：  </p>
+<pre><code>UIView *view = stepper;
+while (view != nil &amp;&amp; ![view isKindOfClass:[UITableViewCell class]]) {
+                view = [view superview];
+            }
+AfternoonTeaShopCell *superCell = (AfternoonTeaShopCell *)view;  
+</code></pre><p>总算解决了bug，但是一切的源头还是由于我换了另一种方法去操作，并且考虑不周。</p>
+<p>给UITableViewCell的按钮添加事件有三种方法：    </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout22321sadsjkaskdgakuj.jpg" alt="enter image description here"></p>
+<p>##Tag方式</p>
+<p> 通过给<code>button</code>设置<code>tag</code>，一般设置为<code>indexPath.row</code>  </p>
+<pre><code>[cell.delBtn addTarget:self action:@selector(delItem:) forControlEvents:UIControlEventTouchUpInside];
+cell.delBtn.tag = indexPath.row;  
+</code></pre><p>然后，在点击事件<code>delItem</code>中：  </p>
+<pre><code>- (void)delItem:(UIButton *)btn{
+    NSInteger index = btn.tag;//1
+    [self.dataArray removeObjectAtIndex:index];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationMiddle];
+}  
+</code></pre><p>通过<code>btn.tag</code>获取我们当前操作了第几行,然后<code>remove</code>数据源（dataArray）对应的数据，再使用<code>deleteRowsAtIndexPaths</code>给<code>tableview</code>添加一个删除动画，一切没看来是那么perfect，让我们看看效果，运行:    </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160420.gif" alt="enter image description here">  </p>
+<p> 还好没抱太大希望，不然会得到生命不能承受之重的绝望，当我们点击第一个删除按钮的时候，一切都是正常的，当我们点击第二个删除按钮的时候，我们点击的是<code>title-&gt;1</code>这一行，但是却是把<code>title-&gt;2</code>删除了，当我们点击最后一行的时候，直接crash。</p>
+<p> 这里我们将<code>delItem</code>的代码修改一下，将: </p>
+<pre><code>[self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationMiddle];  
+</code></pre><p>  改为:  </p>
+<pre><code>[self.tableView reloadData];  
+</code></pre><p>运行:    </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160420_1.gif" alt="enter image description here">  </p>
+<p>一切正常，就是没有了删除动画，聪明的你应该已经知道答案了吧。</p>
+<p>####当我们使用<code>deleteRowsAtIndexPaths</code>方法时：  </p>
+<ol>
+<li>首先删除了第0行，这时候之前的第一行(title-&gt;1)成为了现在的第0行</li>
+<li>当我们点击第0行(title-&gt;1)这行的删除按钮时，这时候我们需要的是删除第0行的数据，但是要注意一点，我们在<code>cellForRowAtIndexPath</code>给<code>button</code> 设置的<code>tag</code>就是当前的行数，而我们调用的<code>deleteRowsAtIndexPaths</code>方法是不会调<code>cellForRowAtIndexPath</code>的，所以，我们删除了(title-&gt;0)这行之后，我们当前的(title-&gt;1)的<code>tag</code>还是1，而非我们想要的0，所以，这里会把(title-&gt;1)下面那行删除掉</li>
+<li><p>当我们点击最后一行的时候，crash，我们看一张图:  </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout3.pic.jpg" alt="enter image description here">  </p>
+<p>此时数据源(dataArray)的<code>count</code>是7，但是我们的<code>index</code>却是9，所以是由数组越界引起的crash.  </p>
+</li>
+</ol>
+<p>####当我们使用<code>reloadData</code>时<br>   因为每次删除操作之后都调用了<code>cellForRowAtIndexPath</code>，所以保证了<code>button.tag</code>的值是最新的，所以可以正常运行，但是对于删除的操作就显得突兀，没有过渡动画.  </p>
+<p>##Cell.superview方式<br>使用这种方式，我们不需要给<code>button</code>设置<code>tag</code>，下面是代码:  </p>
+<pre><code>- (void)delItem:(UIButton *)btn{
+
+    UIView *view = btn;
+    while (view != nil &amp;&amp; ![view isKindOfClass:[UITableViewCell class]]) {
+        view = [view superview];
+    }
+
+    Cell *cell = (Cell *)view;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+    [self.dataArray removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];  
+}   
+</code></pre><p>##delegate方式  </p>
+<p> 通过<code>delegate</code>的方式，将<code>button</code>的点击事件回传.  </p>
+<p>   delegate: </p>
+<pre><code>@protocol CellDelegate &lt;NSObject&gt; 
+
+- (void)delBtnClick:(DelegateCell *)cell;  
+
+@end  
+</code></pre><p>在<code>DelegateCell</code>的删除按钮点击事件中:  </p>
+<pre><code>- (IBAction)delClick:(UIButton *)sender {
+    if ([self.delegate respondsToSelector:@selector(delBtnClick:)]) {
+        [self.delegate delBtnClick:self];
+    }  
+}  
+</code></pre><p>记得在<code>cellForRowAtIndexPath</code> 中设置:  </p>
+<pre><code>cell.delegate = self;  
+</code></pre><p>最后，在当前控制器实现<code>delegate</code>的<code>delBtnClick</code>方法:  </p>
+<pre><code>- (void)delBtnClick:(DelegateCell *)cell{
+
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+
+    [self.dataArray removeObjectAtIndex:indexPath.row];
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+}  
+</code></pre><p>这种方式和<code>Cell.superview</code>方式类似，都是为了获取当前的<code>cell</code>，然后获得<code>indexPath</code>，再删除。  </p>
+<p>好了，以上就是<code>UITableViewCell</code>的删除按钮处理事件的几种方式，推荐使用后两种方式来进行操作，第一种虽然代码比较少，但是很难在保证<code>tag</code> 正确性的前提下加入删除动画，当然你也可以在删除动画完成后再使用<code>reloadData</code> 刷新列表，但是这没必要不是吗？如果你对第一种有更好的方法解决请一定要告诉我，我还是刚起飞的菜鸟，很多事情站在我的角度会看不全。  </p>
+<p> <a href="https://github.com/CorzFree/Demo-20160418" target="_blank" rel="external">本文的Demo,包含swift和objc两个版本</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS-bug/" rel="tag"># iOS bug</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/10/风火轮是怎么练成的/" rel="next" title="风火轮是怎么练成的">
+                <i class="fa fa-chevron-left"></i> 风火轮是怎么练成的
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/22/HBuilder初试，在iOS和android上安装我们的demo/" rel="prev" title="HBuilder初试，在iOS和android上安装我们的demo">
+                HBuilder初试，在iOS和android上安装我们的demo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="corzfree" />
+          <p class="site-author-name" itemprop="name">corzfree</p>
+           
+              <p class="site-description motion-element" itemprop="description">这世界，还有很多不知道的存在</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CorzFree" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/corzfree" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">corzfree</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

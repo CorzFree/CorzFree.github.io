@@ -1,0 +1,1182 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS动画," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="##CALayer
+
+CALayer用来在屏幕上显示和做动画，UIView仅仅是对CALayer的一个封装，可以通过UIView的高级API间接地使得动画变得很简单    
+
+UIView没有暴露出来的CALayer的功能:
+
+阴影，圆角，带颜色的边框
+3D变换
+非矩形范围
+透明遮罩
+多级非线性动画">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS核心动画高级技巧笔记(一)">
+<meta property="og:url" content="http://yoursite.com/2016/07/25/iOS核心动画高级技巧笔记-一/index.html">
+<meta property="og:site_name" content="蔡锐炜的小黑屋">
+<meta property="og:description" content="##CALayer
+
+CALayer用来在屏幕上显示和做动画，UIView仅仅是对CALayer的一个封装，可以通过UIView的高级API间接地使得动画变得很简单    
+
+UIView没有暴露出来的CALayer的功能:
+
+阴影，圆角，带颜色的边框
+3D变换
+非矩形范围
+透明遮罩
+多级非线性动画">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter2/2.6.png">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter2/2.9.png">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter3/3.3.jpeg">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.6.png">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.18.png">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.20.png">
+<meta property="og:updated_time" content="2017-04-08T01:16:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS核心动画高级技巧笔记(一)">
+<meta name="twitter:description" content="##CALayer
+
+CALayer用来在屏幕上显示和做动画，UIView仅仅是对CALayer的一个封装，可以通过UIView的高级API间接地使得动画变得很简单    
+
+UIView没有暴露出来的CALayer的功能:
+
+阴影，圆角，带颜色的边框
+3D变换
+非矩形范围
+透明遮罩
+多级非线性动画">
+<meta name="twitter:image" content="https://zsisme.gitbooks.io/ios-/content/chapter2/2.6.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/25/iOS核心动画高级技巧笔记-一/"/>
+
+
+
+
+
+  <title> iOS核心动画高级技巧笔记(一) | 蔡锐炜的小黑屋 </title>
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71ef3e3830d0a0ce2c470e01905752a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蔡锐炜的小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/07/25/iOS核心动画高级技巧笔记-一/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="corzfree">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蔡锐炜的小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS核心动画高级技巧笔记(一)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-25T02:47:50+08:00">
+                2016-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/07/25/iOS核心动画高级技巧笔记-一/" class="leancloud_visitors" data-flag-title="iOS核心动画高级技巧笔记(一)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##<strong>CALayer</strong></p>
+<ul>
+<li><p><code>CALayer</code>用来在屏幕上显示和做动画，<code>UIView</code>仅仅是对<code>CALayer</code>的一个封装，可以通过<code>UIView</code>的高级API间接地使得动画变得很简单    </p>
+</li>
+<li><p><code>UIView</code>没有暴露出来的<code>CALayer</code>的功能:</p>
+<ul>
+<li>阴影，圆角，带颜色的边框</li>
+<li>3D变换</li>
+<li>非矩形范围</li>
+<li>透明遮罩</li>
+<li>多级非线性动画<a id="more"></a></li>
+</ul>
+</li>
+<li><strong>contents</strong> － 我们可以使用<code>CALayer</code>来展示一张图片，而不用<code>UIImageView</code><br>  <code>layer.contents = (__bridge id)image.CGImage;</code>  </li>
+</ul>
+<ul>
+<li><p><strong>contentGravity</strong> － 与<code>UIImageView</code>的<code>contentMode</code>属性一样，<code>contentsGravity</code>的目的是为了决定内容在图层的边界中怎么对齐，<code>contentsGravity</code>可选的常量值有以下一些：  </p>
+<ul>
+<li>kCAGravityCenter</li>
+<li>kCAGravityTop</li>
+<li>kCAGravityBottom</li>
+<li>kCAGravityLeft</li>
+<li>kCAGravityRight</li>
+<li>kCAGravityTopLeft</li>
+<li>kCAGravityTopRight</li>
+<li>kCAGravityBottomLeft</li>
+<li>kCAGravityBottomRight</li>
+<li>kCAGravityResize</li>
+<li>kCAGravityResizeAspect</li>
+<li>kCAGravityResizeAspectFill  </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>contentsScale</strong> － 设置图层的<code>contentsScale</code>属性，适配Retina屏幕<br>   <code>layer.contentsScale = [UIScreen mainScreen].scale;</code></p>
+</li>
+<li><p><strong>maskToBounds</strong>－<code>UIView(clipsToBounds)</code>,<code>CALayer(masksToBounds)</code>决定是否显示超出边界的内容</p>
+</li>
+<li><p><strong>contentsRect</strong> - 定义了展示的区域，默认是<strong>{0, 0, 1, 1}</strong>，改为<strong>{0,0,0.5,0.5}</strong>，图片就会被裁剪  </p>
+<p>  <img src="https://zsisme.gitbooks.io/ios-/content/chapter2/2.6.png" alt="enter image description here"></p>
+</li>
+<li><p><strong>contentsCenter</strong> - 定义了一个固定的边框和一个在图层上可拉伸的区域，默认是<strong>{0, 0, 1, 1}</strong>，<code>contentsCenter</code>设置为<strong>{0.25, 0.25, 0.5, 0.5}</strong>的效果:</p>
+<p>  <img src="https://zsisme.gitbooks.io/ios-/content/chapter2/2.9.png" alt="enter image description here"></p>
+</li>
+<li><p><strong>-drawRect:</strong>  - 重载该方法，会为视图分配一个寄宿图，这个寄宿图的像素尺寸等于视图大小乘以 <code>contentsScale</code>的值。如果没有自定义绘制的任务就不要在子类中写一个空的<code>-drawRect:</code>方法。  </p>
+<p> 当调用了<code>setNeedsDisplay</code>，会自动调用<code>-drawRect:</code>重绘，重绘时，<code>CALayer</code>会请求它的<code>CALayerDelegate</code><strong>（非正式协议，其实就是说没有CALayerDelegate @protocol可以让你在类里面引用）</strong>给他一个寄宿图来显示。它通过调用下面这个方法做到的:</p>
+<p> <code>－(void)displayLayer:(CALayerCALayer *)layer;</code></p>
+<p> 趁着这个机会，如果代理想直接设置<code>contents</code>属性的话，它就可以这么做，不然没有别的方法可以调用了。如果代理不实现<code>-displayLayer:</code>方法，CALayer就会转而尝试调用下面这个方法：</p>
+<p><code>-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx;</code></p>
+<p> <code>CALayer</code>不会自动重绘它的内容，它把重绘的决定权交给了开发者，所以我们需要<code>CALayer</code>重绘时要显式地调用<code>-display</code></p>
+</li>
+<li><p><strong>锚点(anchorPoint)</strong> - 默认位于图层的中点，所有图层的将会以这个点为中心放置，<code>anchorPoint</code>可以被移动，比如你可以把它置于图层<code>frame</code>的左上角，于是图层的内容将会向右下角的<code>position</code>方向移动，而不是居中了</p>
+<p><img src="https://zsisme.gitbooks.io/ios-/content/chapter3/3.3.jpeg" alt="enter image description here"></p>
+<p>  改变了<code>anchorPoint</code>，<code>position</code>属性保持固定的值并没有发生改变，但是<code>frame</code>却移动了。</p>
+</li>
+</ul>
+<hr>
+<p>##<strong>视觉效果</strong></p>
+<ul>
+<li><p><strong>阴影</strong></p>
+<ul>
+<li><p><strong>shadowOpacity</strong>：设置大于默认值（也就是0）的值，阴影就可以显示，//0.0（不可见） 1.0（完全不透明）</p>
+</li>
+<li><p><strong>shadowColor</strong>：控制着阴影的颜色，默认是黑色  </p>
+</li>
+<li><strong>shadowOffset</strong>：控制着阴影的方向和距离，默认值是 {0, -3}，宽度控制这阴影横向的位移，高度控制着纵向的位移  </li>
+<li><p><strong>shadowRadius</strong>：控制着阴影的模糊度，当它的值是0的时候，阴影就和视图一样有一个非常确定的边界线。当值越来越大的时候，边界线看上去就会越来越模糊和自然</p>
+<p>给<code>shadowRadius</code>设置一个稍大的值  </p>
+<p><img src="https://zsisme.gitbooks.io/ios-/content/chapter4/4.6.png" alt="enter image description here"></p>
+</li>
+</ul>
+</li>
+<li><p><strong>图层蒙板</strong> － <code>mask</code>，<code>mask</code>本身就是个<code>CALayer</code>类型，有和其他图层一样的绘制和布局属性，<code>mask</code>图层定义了父图层的部分可见区域    </p>
+<p>  <img src="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png" alt="enter image description here"></p>
+</li>
+<li><p><strong>拉伸过滤</strong> － <code>CALayer</code>有三种拉伸过滤方法，他们是：  </p>
+<ul>
+<li>kCAFilterLinear</li>
+<li>kCAFilterNearest</li>
+<li><p>kCAFilterTrilinear  </p>
+<ul>
+<li>较小的图或者是差异特别明显、极少斜线的大图，Nearest会保留这种差异明显的特质以呈现更好的结果</li>
+<li><p>对于大多数的图尤其是有很多斜线或曲线轮廓的图片，选用kCAFilterLinear或kCAFilterTrilinear</p>
+<p>  如下，默认的<code>kCAFilterLinear</code>选项让我们失望了</p>
+<p>  <img src="https://zsisme.gitbooks.io/ios-/content/chapter4/4.18.png" alt="enter image description here"></p>
+<p>  改变过滤的方法</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>`view.layer.magnificationFilter = kCAFilterNearest;`
+
+   ![enter image description here](https://zsisme.gitbooks.io/ios-/content/chapter4/4.19.png)
+</code></pre><ul>
+<li><p><strong>组透明</strong></p>
+<ul>
+<li><p><code>alpha(UIView)</code>、<code>opacity(CALayer)</code>都会影响子层级的  </p>
+<p>  <img src="https://zsisme.gitbooks.io/ios-/content/chapter4/4.20.png" alt="enter image description here"></p>
+</li>
+<li><p>组透明整体实现方案</p>
+<ul>
+<li>UIViewGroupOpacity -&gt; YES(Info.plist)  </li>
+<li>allowsGroupOpacity(IOS7+可用，相当于UIViewGroupOpacity)  </li>
+<li>shouldRasterize+rasterizationScale(配置屏幕)，如果它被设置为YES，在应用透明度之前，图层及其子图层都会被整合成一个整体的图片</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>##<strong>变换</strong></p>
+<ul>
+<li><p><strong>仿射变换</strong></p>
+<ul>
+<li>混合变换，变换的顺序会影响最终的结果，也就是说旋转之后的平移和平移之后的旋转结果可能不同    </li>
+</ul>
+</li>
+<li><p><strong>3D变换</strong></p>
+<ul>
+<li>透视投影（m34），<code>m34</code>的默认值是0，我们可以通过设置<code>m34</code>为<code>-1.0 / d</code>来应用透视效果，<code>d</code>代表了想象中视角相机和屏幕之间的距离，通常设置为<code>500~1000</code>    </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>灭点</strong> － 永远位于图层变换之前<code>anchorPoint</code>的位置</p>
+</li>
+<li><p><strong>sublayerTransform</strong> - 一次性对包含这些图层的容器做变换</p>
+</li>
+<li><p><strong>doubleSided</strong> - 不渲染背面，不影响事件响应，设置hidden或alpha为0会影响事件响应</p>
+</li>
+</ul>
+<hr>
+<p>##<strong>专用图层</strong></p>
+<ul>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cashapelayer.html" target="_blank" rel="external">CAShapeLayer</a> - 通过矢量图形而不是bitmap来绘制的图层子类</p>
+<ul>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li>渲染快速（硬件加速）</li>
+<li>高效使用内存（不需创建寄宿图）</li>
+<li>不会被图层边界剪裁掉（可以在边界之外绘制）</li>
+<li>不会出现像素化（矢量图形）</li>
+</ul>
+<ul>
+<li><strong>圆角</strong> - 可以单独指定每个角 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/CATextLayer.html" target="_blank" rel="external">CATextLayer</a> - 使用了Core text，并且渲染得非常快</p>
+<ul>
+<li>防止像素化<br><code>textLayer.contentsScale = [UIScreen mainScreen].scale;</code></li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/catransformlayer.html" target="_blank" rel="external">CATransformLayer</a>  － 不能显示它自己的内容。只有当存在了一个能作用域子图层的变换它才真正存在</p>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cagradientLayer.html" target="_blank" rel="external">CAGradientLayer</a>  － 生成两种或更多颜色平滑渐变，真正好处在于绘制使用了硬件加速</p>
+<ul>
+<li><strong>基础渐变</strong><ul>
+<li><code>startPoint</code>和<code>endPoint</code>属性，他们决定了渐变的方向</li>
+<li><code>colors</code>属性，决定了渐变的颜色  <ul>
+<li><strong>多重渐变</strong></li>
+<li><code>locations</code>属性定义了<code>colors</code>属性中每个不同颜色的位置，非强制要求设置，但是如果你给它赋值了就一定要确保<code>locations</code>的数组大小和<code>colors</code>数组大小一定要相同</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/careplicatorLayer.html" target="_blank" rel="external">CAReplicatorLayer</a> － 高效生成许多相似的图层</p>
+<ul>
+<li><strong>重复图层（Repeating Layers）</strong><pre><code>- `instanceCount`属性指定了图层需要重复多少次
+- `instanceTransform`指定了一个`CATransform3D`3D变换
+- 反射 - [ReflectionView](https://github.com/nicklockwood/ReflectionView)
+</code></pre></li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cascrollLayer.html" target="_blank" rel="external">CAScrollLayer</a></p>
+<ul>
+<li><code>scrollToPoint</code>:方法，它自动适应<code>bounds</code>的原点以便图层内容出现在滑动的地方</li>
+<li>内容完全可以超过边界</li>
+<li><code>UIScrollView</code>并没有用<code>CAScrollLayer</code></li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/catiledLayer.html" target="_blank" rel="external">CATiledLayer</a> － 将大图分解成小片然后将他们单独按需载入</p>
+<ul>
+<li>小片裁剪，大图裁剪成小图，用<code>CATiledLayer</code>展示  </li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/caemitterlayer.html" target="_blank" rel="external">CAEmitterLayer</a> － 高性能的粒子引擎，被用来创建实时例子动画如：烟雾，火，雨等等这些效果</p>
+<ul>
+<li><p><strong>preservesDepth</strong> － 是否将3D例子系统平面化到一个图层（默认值）或者可以在3D空间中混合其他的图层  </p>
+</li>
+<li><p><strong>renderMode</strong> － 控制着在视觉上粒子图片是如何混合的,<code>kCAEmitterLayerAdditive</code>是叠加效果，其他是覆盖效果</p>
+</li>
+<li><p><strong>CAEmitterCell</strong> － <code>CAEmitterLayer</code>看上去像是许多<code>CAEmitterCell</code>的容器，这些<code>CAEmitierCell</code>定义了一个粒子效果。你将会为不同的粒子效果定义一个或多个<code>CAEmitterCell</code>作为模版，同时<code>CAEmitterLayer</code>负责基于这些模版实例化一个粒子流。一个<code>CAEmitterCell</code>类似于一个<code>CALayer</code>：它有一个<code>contents</code>属性可以定义为一个<code>CGImage</code>，另外还有一些可设置属性控制着表现和行为。  </p>
+<ul>
+<li>这种粒子的某一属性的初始值。比如，<code>color</code>属性指定了一个可以混合图片内容颜色的混合色。在示例中，我们将它设置为桔色。<ul>
+<li>例子某一属性的变化范围。比如<code>emissionRange</code>属性的值是<code>2π</code>，这意味着例子可以从360度任意位置反射出来。如果指定一个小一些的值，就可以创造出一个圆锥形</li>
+<li>指定值在时间线上的变化。比如，在示例中，我们将<code>alphaSpeed</code>设置为<code>-0.4</code>，就是说例子的透明度每过一秒就是减少0.4，这样就有发射出去之后逐渐小时的效果。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/caeagllayer.html" target="_blank" rel="external">CAEAGLLayer</a> - 最后的杀手锏，OpenGL  </p>
+<ul>
+<li>所有东西都是3D空间中有颜色和纹理的三角形</li>
+<li>GLKit框架</li>
+</ul>
+</li>
+<li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/avplayerlayer.html" target="_blank" rel="external">AVPlayerLayer</a></p>
+<ul>
+<li><code>AVFoundation</code>框架提供</li>
+<li>支持3D，圆角，有色边框，蒙板，阴影等效果</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS动画/" rel="tag"># iOS动画</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/20/淘宝商品列表页样式切换-CollectionView/" rel="next" title="淘宝商品列表页样式切换(CollectionView)">
+                <i class="fa fa-chevron-left"></i> 淘宝商品列表页样式切换(CollectionView)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/28/其实，我只想要张封面图/" rel="prev" title="其实，我只想要张封面图">
+                其实，我只想要张封面图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="corzfree" />
+          <p class="site-author-name" itemprop="name">corzfree</p>
+           
+              <p class="site-description motion-element" itemprop="description">这世界，还有很多不知道的存在</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CorzFree" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/corzfree" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">corzfree</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

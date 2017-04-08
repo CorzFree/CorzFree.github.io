@@ -1,0 +1,940 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="自动打包," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="###为什么要自动iOS开发，有两个感觉比较耗时，其一是证书，对于第一次接触的人来说，需要时间去熟悉，其二便是项目打包，导出上传测试。对于比较大的项目，打包的时间会比较长，在测试阶段，测试MM会要求你不断打包，更新，测试，一直循环，做为一个程序猿，能偷懒就偷懒，能用一行命令解决的东西，绝不用多一行，所以，我们需要自动打包，帮我们完成 ‘打包-&amp;gt;上传-&amp;gt;发邮件通知MM’">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS自动打包">
+<meta property="og:url" content="http://yoursite.com/2017/02/02/iOS自动打包/index.html">
+<meta property="og:site_name" content="蔡锐炜的小黑屋">
+<meta property="og:description" content="###为什么要自动iOS开发，有两个感觉比较耗时，其一是证书，对于第一次接触的人来说，需要时间去熟悉，其二便是项目打包，导出上传测试。对于比较大的项目，打包的时间会比较长，在测试阶段，测试MM会要求你不断打包，更新，测试，一直循环，做为一个程序猿，能偷懒就偷懒，能用一行命令解决的东西，绝不用多一行，所以，我们需要自动打包，帮我们完成 ‘打包-&amp;gt;上传-&amp;gt;发邮件通知MM’">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/timg.jpeg">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2017-02-02-14859940401623.jpg">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2017-02-02-14859940883170.jpg">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2017-02-02-14859942822248.jpg">
+<meta property="og:updated_time" content="2017-04-08T01:16:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS自动打包">
+<meta name="twitter:description" content="###为什么要自动iOS开发，有两个感觉比较耗时，其一是证书，对于第一次接触的人来说，需要时间去熟悉，其二便是项目打包，导出上传测试。对于比较大的项目，打包的时间会比较长，在测试阶段，测试MM会要求你不断打包，更新，测试，一直循环，做为一个程序猿，能偷懒就偷懒，能用一行命令解决的东西，绝不用多一行，所以，我们需要自动打包，帮我们完成 ‘打包-&amp;gt;上传-&amp;gt;发邮件通知MM’">
+<meta name="twitter:image" content="http://7xrlno.com1.z0.glb.clouddn.com/timg.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/02/iOS自动打包/"/>
+
+
+
+
+
+  <title> iOS自动打包 | 蔡锐炜的小黑屋 </title>
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71ef3e3830d0a0ce2c470e01905752a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蔡锐炜的小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/02/iOS自动打包/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="corzfree">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蔡锐炜的小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS自动打包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-02T20:55:36+08:00">
+                2017-02-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/02/02/iOS自动打包/" class="leancloud_visitors" data-flag-title="iOS自动打包">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div style="margin:0 auto;display:none;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/timg.jpeg"><br></div><br>###为什么要自动<br>iOS开发，有两个感觉比较耗时，其一是证书，对于第一次接触的人来说，需要时间去熟悉，其二便是项目打包，导出上传测试。对于比较大的项目，打包的时间会比较长，在测试阶段，测试MM会要求你不断打包，更新，测试，一直循环，做为一个程序猿，能偷懒就偷懒，能用一行命令解决的东西，绝不用多一行，所以，我们需要自动打包，帮我们完成 ‘打包-&gt;上传-&gt;发邮件通知MM’<br><a id="more"></a><br>###准备<br>- 安装 xcode<br>- 安装 python<br>- 安装 fir<br>    通过 <code>gem install fir-cli</code>安装<code>fir</code> 如果你没有<code>ruby</code>环境，自行搜索<br><br>###脚步<br>脚步来自<a href="https://github.com/smalldu/autoipa" target="_blank" rel="external">iOS本地打包</a>，做了修改<br><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div></pre></td><td class="code"><pre><div class="line"># -*- coding: utf-8 -*-</div><div class="line">import os</div><div class="line">import sys</div><div class="line">import time</div><div class="line">import hashlib</div><div class="line">from email import encoders</div><div class="line">from email.header import Header</div><div class="line">from email.mime.text import MIMEText</div><div class="line">from email.utils import parseaddr, formataddr</div><div class="line">import smtplib</div><div class="line"></div><div class="line"># 是否使用了coocaPods</div><div class="line">hasPods = True</div><div class="line"># 项目名称</div><div class="line">project_name = &quot;AutoLayout&quot;</div><div class="line"># 项目根目录</div><div class="line">project_path = &quot;/Users/xxx/Desktop/&quot; + project_name</div><div class="line"># 编译成功后.app所在目录 pods打包后目录</div><div class="line">app_path_pods = &quot;/Users/xxx/Desktop/&quot; + project_name + &quot;/build/Build/Products/Release-iphoneos/&quot; + project_name + &quot;.app&quot;</div><div class="line"># 非pods打包后目录</div><div class="line">app_path = &quot;/Users/xxx/Desktop/&quot; + project_name + &quot;/build/Release-iphoneos/&quot; + project_name + &quot;.app&quot;</div><div class="line"># 指定项目下编译目录</div><div class="line">build_path = &quot;build&quot;</div><div class="line"># 打包后ipa存储目录</div><div class="line">targerIPA_parth = &quot;/Users/xxx/Desktop&quot;</div><div class="line"></div><div class="line"></div><div class="line"># firm的api token</div><div class="line">fir_api_token = &quot;xxxxxxx&quot;</div><div class="line"></div><div class="line">from_addr = &quot;xxx@sina.com&quot;</div><div class="line">password = &quot;xxxx&quot;</div><div class="line">smtp_server = &quot;smtp.sina.com&quot;</div><div class="line">to_addr = &apos;xxx@qq.com&apos;</div><div class="line"></div><div class="line"></div><div class="line"># 清理项目 创建build目录</div><div class="line">def clean_project_mkdir_build():</div><div class="line">    os.system(&apos;cd %s;xcodebuild clean&apos; % project_path) # clean 项目</div><div class="line">    os.system(&apos;cd %s;mkdir build&apos; % project_path)</div><div class="line"></div><div class="line">def build_project():</div><div class="line">    print(&quot;build release start&quot;)</div><div class="line">    if hasPods:#区分是否使用pods，两者编译命令不同</div><div class="line">        print(&apos;isPods...&apos;)</div><div class="line">        os.system (&apos;xcodebuild -list&apos;)</div><div class="line">        os.system (&apos;cd %s;xcodebuild -workspace %s.xcworkspace  -scheme %s -configuration release -derivedDataPath %s ONLY_ACTIVE_ARCH=NO || exit&apos; % (project_name,project_name,project_path,build_path))</div><div class="line">        # CONFIGURATION_BUILD_DIR=./build/Release-iphoneos</div><div class="line">    else:</div><div class="line">        os.system(&apos;xcodebuild -configuration debug build&apos;)</div><div class="line">        #build/Release-iphoneos/xx.app</div><div class="line"></div><div class="line"># 打包ipa 并且保存在桌面</div><div class="line">def build_ipa():</div><div class="line">    global ipa_filename</div><div class="line">    ipa_filename = time.strftime(project_name + &apos;_%Y-%m-%d-%H-%M-%S.ipa&apos;,time.localtime(time.time()))</div><div class="line">    if hasPods:</div><div class="line">        os.system (&apos;xcrun -sdk iphoneos PackageApplication -v %s -o %s/%s&apos;%(app_path_pods,targerIPA_parth,ipa_filename))</div><div class="line">    else:</div><div class="line">        os.system (&apos;xcrun -sdk iphoneos PackageApplication -v %s -o %s/%s&apos;%(app_path,targerIPA_parth,ipa_filename))</div><div class="line"></div><div class="line">#上传</div><div class="line">def upload_fir():</div><div class="line">    if os.path.exists(&quot;%s/%s&quot; % (targerIPA_parth,ipa_filename)):</div><div class="line">        print(&apos;watting...&apos;)</div><div class="line">        # 直接使用fir 有问题 这里使用了绝对地址 在终端通过 which fir 获得</div><div class="line">        ret = os.system(&quot;/usr/bin/fir p &apos;%s/%s&apos; -T &apos;%s&apos;&quot; % (targerIPA_parth,ipa_filename,fir_api_token))</div><div class="line">    else:</div><div class="line">        print(&quot;没有找到ipa文件&quot;)</div><div class="line"></div><div class="line">def _format_addr(s):</div><div class="line">    name, addr = parseaddr(s)</div><div class="line">    return formataddr((Header(name, &apos;utf-8&apos;).encode(), addr))</div><div class="line"></div><div class="line"># 发邮件</div><div class="line">def send_mail():</div><div class="line">    print(&quot;开始发送&quot;)</div><div class="line">    msg = MIMEText(&apos;xx iOS测试项目已经打包完毕，请前往 http://fir.im/xxxxx 下载测试！&apos;, &apos;plain&apos;, &apos;utf-8&apos;)</div><div class="line">    msg[&apos;From&apos;] = _format_addr(&apos;自动打包系统 &lt;%s&gt;&apos; % from_addr)</div><div class="line">    msg[&apos;To&apos;] = _format_addr(&apos;xx测试人员 &lt;%s&gt;&apos; % to_addr)</div><div class="line">    msg[&apos;Subject&apos;] = Header(&apos;xx iOS客户端打包程序&apos;, &apos;utf-8&apos;).encode()</div><div class="line">    server = smtplib.SMTP(smtp_server,25)</div><div class="line">    server.set_debuglevel(1)</div><div class="line">    server.login(from_addr, password)</div><div class="line">    server.sendmail(from_addr, [to_addr], msg.as_string())</div><div class="line">    server.quit()</div><div class="line">    print(&quot;发送完毕~!&quot;)</div><div class="line"></div><div class="line">def main():</div><div class="line">    # 清理并创建build目录</div><div class="line">    clean_project_mkdir_build()</div><div class="line">    # 编译coocaPods项目文件并 执行编译目录</div><div class="line">    build_project()</div><div class="line">    # 打包ipa 并制定到桌面</div><div class="line">    build_ipa()</div><div class="line">    # 上传fir</div><div class="line">    upload_fir()</div><div class="line">    # 发邮件</div><div class="line">    send_mail()</div><div class="line"></div><div class="line"># 执行</div><div class="line">main()</div></pre></td></tr></table></figure><br><br>###fir token获取<br><br><div style="width:70%;margin:0 auto;padding-bottom:15px;padding-top:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2017-02-02-14859940401623.jpg"><br></div>
+
+<div style="width:70%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2017-02-02-14859940883170.jpg"><br></div>
+
+
+<p>###xcode配置好证书  </p>
+<div style="width:70%;margin:0 auto;padding-bottom:15px;margin-top:-15px;padding-top:15px"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2017-02-02-14859942822248.jpg"><br></div>
+
+
+<p>###开始打包<br>xcode配置好证书之后，将脚步拷贝到项目的根目录（为了每个项目打包方便，放桌面也可以），终端cd到该位置，执行<code>python xxx.py</code>脚步，即可一行代码完成 打包-&gt;上传-&gt;发邮件</p>
+<p>iOS的自动打包就此结束，后面会继续将android的打包也自动化</p>
+<p>参考文章：<br><a href="http://stonedu.site/2016/08/17/iOS-%E6%9C%AC%E5%9C%B0%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7/" target="_blank" rel="external">iOS 本地打包工具</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自动打包/" rel="tag"># 自动打包</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/23/前端to后台，使用Mock-js模拟数据/" rel="next" title="前端to后台，使用Mock.js模拟数据">
+                <i class="fa fa-chevron-left"></i> 前端to后台，使用Mock.js模拟数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/19/一步两步向前走-mui消息推送/" rel="prev" title="一步两步向前走(mui消息推送)">
+                一步两步向前走(mui消息推送) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="corzfree" />
+          <p class="site-author-name" itemprop="name">corzfree</p>
+           
+              <p class="site-description motion-element" itemprop="description">这世界，还有很多不知道的存在</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CorzFree" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/corzfree" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">corzfree</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

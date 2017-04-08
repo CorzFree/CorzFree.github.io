@@ -1,0 +1,1039 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CollectionView," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="淘宝的搜索出来的商品列表可以切换样式，下面是在一个pdf的demo里面模仿了淘宝的这个功能，点一下左上角的change style，界面由三列变成单列，你可以使用一个tableView+collectionView实现，当然，这是比较费力的办法，我们这次，只用collectionView来实现这个效果，姿势用的好，没有xxx推不倒">
+<meta property="og:type" content="article">
+<meta property="og:title" content="淘宝商品列表页样式切换(CollectionView)">
+<meta property="og:url" content="http://yoursite.com/2016/06/20/淘宝商品列表页样式切换-CollectionView/index.html">
+<meta property="og:site_name" content="蔡锐炜的小黑屋">
+<meta property="og:description" content="淘宝的搜索出来的商品列表可以切换样式，下面是在一个pdf的demo里面模仿了淘宝的这个功能，点一下左上角的change style，界面由三列变成单列，你可以使用一个tableView+collectionView实现，当然，这是比较费力的办法，我们这次，只用collectionView来实现这个效果，姿势用的好，没有xxx推不倒">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/201606201400.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutB6EAC204-6AE7-436F-AEDB-F0949FF8EC1D.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout82869FDE-3CA8-4B78-ADC8-7A5B2F5D4A5A.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout69B5DD0C-4358-4F01-A64B-7A57E8C8EC4A.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout201606201600.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutE715C4D1-6DB5-44C9-98B1-B789ED2B5AFF.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout201606201600-02.gif">
+<meta property="og:updated_time" content="2017-04-08T01:15:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="淘宝商品列表页样式切换(CollectionView)">
+<meta name="twitter:description" content="淘宝的搜索出来的商品列表可以切换样式，下面是在一个pdf的demo里面模仿了淘宝的这个功能，点一下左上角的change style，界面由三列变成单列，你可以使用一个tableView+collectionView实现，当然，这是比较费力的办法，我们这次，只用collectionView来实现这个效果，姿势用的好，没有xxx推不倒">
+<meta name="twitter:image" content="http://7xrlno.com1.z0.glb.clouddn.com/201606201400.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/06/20/淘宝商品列表页样式切换-CollectionView/"/>
+
+
+
+
+
+  <title> 淘宝商品列表页样式切换(CollectionView) | 蔡锐炜的小黑屋 </title>
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71ef3e3830d0a0ce2c470e01905752a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蔡锐炜的小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/20/淘宝商品列表页样式切换-CollectionView/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="corzfree">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蔡锐炜的小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                淘宝商品列表页样式切换(CollectionView)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-20T00:46:33+08:00">
+                2016-06-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/06/20/淘宝商品列表页样式切换-CollectionView/" class="leancloud_visitors" data-flag-title="淘宝商品列表页样式切换(CollectionView)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>淘宝的搜索出来的商品列表可以切换样式，下面是在一个<strong>pdf</strong>的<strong>demo</strong>里面模仿了淘宝的这个功能，点一下左上角的<code>change style</code>，界面由<code>三列</code>变成<code>单列</code>，你可以使用一个<code>tableView</code>+<code>collectionView</code>实现，当然，这是比较费力的办法，我们这次，只用<code>collectionView</code>来实现这个效果，姿势用的好，没有xxx推不倒  </p>
+<a id="more"></a>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/201606201400.gif" alt="enter image description here"></p>
+<p>众所周知，<code>collectionView</code>可以自定义布局来实现<strong>圆形布局</strong>，<strong>瀑布流布局</strong>，对于这个效果，我们直接使用官方提供的<code>uicollectionviewflowlayout</code>，<code>uicollectionviewflowlayout</code>如同其名，在每一行，一个接一个排列，当所剩的位置不足以容下一个新的<code>cell</code>的时候，另起一行，所以，对于<strong>一列</strong>的情况，我们可以将<code>cell</code>的宽度设置为等于<strong>collectionView的宽度</strong>，这样每行只有一个<code>cell</code>，效果就和<code>tableView</code>一样；对于<strong>多列</strong>的情况，只要控制好<code>cell</code>的宽度，也可以轻松实现，<strong><code>关键在cell的size控制，cell的size又由layout的size所决定</code></strong>，所以核心操作都在</p>
+<pre><code>- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath  
+</code></pre><hr>
+<p>##<strong>Just do it</strong></p>
+<p>新建一个项目，在SB里面放入一个<code>collectionView</code>，再拖入一个<code>collectionViewCell</code>，修改样式如下:    </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutB6EAC204-6AE7-436F-AEDB-F0949FF8EC1D.png" alt="enter image description here">  </p>
+<p>选中<code>collectionView</code>，在右边的属性栏将<code>items</code>改为<code>2</code>:  </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout82869FDE-3CA8-4B78-ADC8-7A5B2F5D4A5A.png" alt="enter image description here"></p>
+<p>这时，<code>collectionView</code>中多了一个<code>cell</code>，我们将另一个的样式修改，最终在SB中的效果如下:    </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout69B5DD0C-4358-4F01-A64B-7A57E8C8EC4A.png" alt="enter image description here"></p>
+<p>nice，我们已经完成了ui的部份，接下来，我们需要新建<code>OneColumCell</code>和<code>MulColumCell</code>对应我们在SB中的两个<code>cell</code>，这里只贴出<code>.m</code>的代码:  </p>
+<p><strong>OneColumCell.m</strong></p>
+<pre><code>#import &quot;OneColumCell.h&quot;
+#import &quot;ProductInfoModel.h&quot;
+
+@interface OneColumCell()
+
+@property (weak, nonatomic) IBOutlet UIImageView *mImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *mTitleLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *mDescLabel;
+
+@property (nonatomic, strong) ProductInfoModel     *model;
+
+@end
+
+@implementation OneColumCell
+
+- (void)setProductInfoModel:(ProductInfoModel *)model{
+    _model = model;
+
+    _mTitleLabel.text = model.title;
+
+    _mDescLabel.text  = model.desc;
+
+    if (model.image) {
+        _mImageView.image = model.image;
+    }
+}
+
+@end
+</code></pre><p><strong>MulColumCell.m</strong></p>
+<pre><code>#import &quot;MulColumCell.h&quot;
+#import &quot;ProductInfoModel.h&quot;
+
+@interface MulColumCell()
+
+@property (weak, nonatomic) IBOutlet UIImageView *mImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *mTitleLabel;
+
+@property (nonatomic, strong) ProductInfoModel     *model;
+
+@end
+
+@implementation MulColumCell
+
+- (void)setProductInfoModel:(ProductInfoModel *)model{
+    _model = model;
+
+    _mTitleLabel.text = model.title;
+
+    if (model.image) {
+        _mImageView.image = model.image;
+    }
+}
+
+@end
+</code></pre><p>好了，是时候回到我们的<code>ViewController</code>中，将一切关联起来，揭开神秘的面纱</p>
+<p>我们需要一个状态来区分当前是<strong>单列</strong>或者<strong>多列</strong></p>
+<pre><code>@property (nonatomic, assign) BOOL     isSingleLine;
+</code></pre><p><code>ViewController</code>实现<code>UICollectionViewDelegateFlowLayout</code>和<code>UICollectionViewDataSource</code>协议</p>
+<pre><code>    - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    ProductInfoModel *model = self.dataArray[indexPath.row];
+    if (self.isSingleLine)//1
+    {
+        OneColumCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([OneColumCell class]) forIndexPath:indexPath];
+        [cell setProductInfoModel:model];
+        return cell;
+    }
+    else
+    {
+        MulColumCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([MulColumCell class]) forIndexPath:indexPath];
+        [cell setProductInfoModel:model];
+        return cell;
+    }
+}  
+
+    - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+        if (self.isSingleLine) {
+            return CGSizeMake([self screenSize].width, 139);//2
+        }
+        return CGSizeMake([self screenSize].width / kColumn , 143);//3
+    }
+</code></pre><p>1.根据<code>self.isSingleLine</code>，返回不同的<code>cell</code><br>2.此处是<strong>单列</strong>模式，将<code>width</code>设置为当前<code>屏幕的宽度</code><br>3.此处是<strong>多列</strong>模式，根据定义的列数<code>kColumn</code>，计算出对应的宽度，在这里，我们的高度写成一个固定值是偷懒了，实际开发中应该是根据不同的屏幕去生成不同的高度，以便更好的适配</p>
+<p>风风火火写了这么多，是时候让新娘子出来见见人了，run～  </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout201606201600.gif" alt="enter image description here"></p>
+<p>看起来效果不错，等等，等等，我们刚才的<code>kColumn</code>明明是<code>3</code>，这里为什么还是两列</p>
+<pre><code>static const NSInteger kColumn = 3;
+</code></pre><p>我们再仔细观察一下，我们发现<code>cell</code>与<code>cell</code>之间有个大概<code>10个点</code>的白色间距，这里我们将<code>cell</code> 的背景色设置为黄色可以更好的看出这些间距，既然上下之间有了间距，所以有没有可能左右也有呢，因为我们的屏幕刚好要放下三个<code>cell</code> ，没有预留边距的位置，所以如果多处了间距的话，就会导致这情况，我们查看SB的属性  </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutE715C4D1-6DB5-44C9-98B1-B789ED2B5AFF.png" alt="enter image description here"></p>
+<p>我们将图所圈的全部改为0，再次run～  </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout201606201600-02.gif" alt="enter image description here"></p>
+<p>去掉了默认的边距之后，已经达到了我们想要的效果，本文的<a href="https://github.com/CorzFree/ProductListDiffDemo" target="_blank" rel="external">Demo点此下载</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CollectionView/" rel="tag"># CollectionView</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/19/React-Native-初接触/" rel="next" title="React Native 初接触">
+                <i class="fa fa-chevron-left"></i> React Native 初接触
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/25/iOS核心动画高级技巧笔记-一/" rel="prev" title="iOS核心动画高级技巧笔记(一)">
+                iOS核心动画高级技巧笔记(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="corzfree" />
+          <p class="site-author-name" itemprop="name">corzfree</p>
+           
+              <p class="site-description motion-element" itemprop="description">这世界，还有很多不知道的存在</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CorzFree" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/corzfree" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">corzfree</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

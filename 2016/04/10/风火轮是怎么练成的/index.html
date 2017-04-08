@@ -1,0 +1,1182 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS动画," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="之前使用CollectionView一直使用默认的UICollectionViewLayout，殊不知CollectionViewLayout还可以玩出花，比如:    
+
+Apple官方圆形布局    
+UICollectionView自定义布局之风火轮[译自raywenderlich]  
+CollectionView自定义风火轮">
+<meta property="og:type" content="article">
+<meta property="og:title" content="风火轮是怎么练成的">
+<meta property="og:url" content="http://yoursite.com/2016/04/10/风火轮是怎么练成的/index.html">
+<meta property="og:site_name" content="蔡锐炜的小黑屋">
+<meta property="og:description" content="之前使用CollectionView一直使用默认的UICollectionViewLayout，殊不知CollectionViewLayout还可以玩出花，比如:    
+
+Apple官方圆形布局    
+UICollectionView自定义布局之风火轮[译自raywenderlich]  
+CollectionView自定义风火轮">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutimg5.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutSimulator%20Screen%20Shot%20Apr%2010%2C%202016%2C%2014.57.49.png">
+<meta property="og:image" content="http://cdn2.raywenderlich.com/wp-content/uploads/2015/06/Screenshot-2015-06-01-14.11.42.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutB82E4790-BE21-477C-B3C4-3F1191FC1A74.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg1.gif">
+<meta property="og:image" content="http://cdn3.raywenderlich.com/wp-content/uploads/2015/06/ragecomic.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg2.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg3.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout324893789281.jpg">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout232135454423213.jpg">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutSimulator%20Screen%20Shot%20Apr%2010%2C%202016%2C%2020.19.18.png">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg4.gif">
+<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutimg5.gif">
+<meta property="og:updated_time" content="2017-04-08T01:12:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="风火轮是怎么练成的">
+<meta name="twitter:description" content="之前使用CollectionView一直使用默认的UICollectionViewLayout，殊不知CollectionViewLayout还可以玩出花，比如:    
+
+Apple官方圆形布局    
+UICollectionView自定义布局之风火轮[译自raywenderlich]  
+CollectionView自定义风火轮">
+<meta name="twitter:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutimg5.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/10/风火轮是怎么练成的/"/>
+
+
+
+
+
+  <title> 风火轮是怎么练成的 | 蔡锐炜的小黑屋 </title>
+</head>
+
+     <!-- custom analytics part create by xiamo -->
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+<script>
+function showTime(Counter) {
+	var query = new AV.Query(Counter);
+	$(".leancloud_visitors").each(function() {
+		var url = $(this).attr("id").trim();
+		query.equalTo("url", url);
+		query.find({
+			success: function(results) {
+				if (results.length == 0) {
+					var content = $(document.getElementById(url)).text() + ': 0';
+					$(document.getElementById(url)).text(content);
+					return;
+				}
+				for (var i = 0; i < results.length; i++) {
+					var object = results[i];
+					var content = $(document.getElementById(url)).text() + ': ' + object.get('time');
+					$(document.getElementById(url)).text(content);
+				}
+			},
+			error: function(object, error) {
+				console.log("Error: " + error.code + " " + error.message);
+			}
+		});
+	});
+}
+function addCount(Counter) {
+	var Counter = AV.Object.extend("Counter");
+	url = $(".leancloud_visitors").attr('id').trim();
+	title = $(".leancloud_visitors").attr('data-flag-title').trim();
+	var query = new AV.Query(Counter);
+	query.equalTo("url", url);
+	query.find({
+		success: function(results) {
+			if (results.length > 0) {
+				var counter = results[0];
+				counter.fetchWhenSave(true);
+				counter.increment("time");
+				counter.save(null, {
+					success: function(counter) {
+						var content = $(document.getElementById(url)).text() + ': ' + counter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(counter, error) {
+						console.log('Failed to save Visitor num, with error message: ' + error.message);
+					}
+				});
+			} else {
+				var newcounter = new Counter();
+				newcounter.set("title", title);
+				newcounter.set("url", url);
+				newcounter.set("time", 1);
+				newcounter.save(null, {
+					success: function(newcounter) {
+					    console.log("newcounter.get('time')="+newcounter.get('time'));
+						var content = $(document.getElementById(url)).text() + ': ' + newcounter.get('time');
+						$(document.getElementById(url)).text(content);
+					},
+					error: function(newcounter, error) {
+						console.log('Failed to create');
+					}
+				});
+			}
+		},
+		error: function(error) {
+			console.log('Error:' + error.code + " " + error.message);
+		}
+	});
+}
+$(function() {
+	var Counter = AV.Object.extend("Counter");
+	if ($('.leancloud_visitors').length == 1) {
+		addCount(Counter);
+	} else if ($('.post-title-link').length > 1) {
+		showTime(Counter);
+	}
+});
+</script>
+  
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71ef3e3830d0a0ce2c470e01905752a1";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">蔡锐炜的小黑屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/10/风火轮是怎么练成的/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="corzfree">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="蔡锐炜的小黑屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                风火轮是怎么练成的
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-10T19:29:23+08:00">
+                2016-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/04/10/风火轮是怎么练成的/" class="leancloud_visitors" data-flag-title="风火轮是怎么练成的">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前使用CollectionView一直使用默认的UICollectionViewLayout，殊不知CollectionViewLayout还可以玩出花，比如:    </p>
+<ul>
+<li><a href="https://developer.apple.com/library/ios/samplecode/CircleLayout/Introduction/Intro.html#//apple_ref/doc/uid/DTS40012315" target="_blank" rel="external">Apple官方圆形布局</a>    </li>
+<li><a href="http://vonglo.me/2015/08/31/UICollectionView自定义布局之风火轮/?utm_source=tuicool" target="_blank" rel="external">UICollectionView自定义布局之风火轮[译自raywenderlich]</a>  </li>
+<li><a href="http://www.jianshu.com/p/455981779117" target="_blank" rel="external">CollectionView自定义风火轮</a> </li>
+</ul>
+<a id="more"></a>
+<p>看了几篇文章之后，便想跟着<a href="http://www.jianshu.com/p/455981779117" target="_blank" rel="external">CollectionView自定义风火轮</a>也撸个风火轮出来，如图:<br><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutimg5.gif" alt="alt"><br>开始之前，还是先了解一下自定义UICollectionViewLayout的相关知识，你可以看<a href="http://www.cocoachina.com/industry/20131122/7401.html" target="_blank" rel="external">自定义CollectionViewLayout</a>这篇教程。</p>
+<hr>
+<p>##coding<br>下载我们的<a href="https://github.com/CorzFree/StartDemo-CustomCircleLayout/archive/master.zip" target="_blank" rel="external">初始工程</a></p>
+<p>CircleLayout为我们自定义的布局，现在里面什么都没有，运行我们的项目。  </p>
+<p>界面是一片空白，尽管我们在ViewController中配置了数据源也返回了相对应的Cell视图，但是CollectionView不知道怎么去显示它们，接下来我们开始我们的风火轮之旅。  </p>
+<p>打开CircleLayout.m，我们需要重写以下几个方法:   </p>
+<ol>
+<li>prepareLayout 每次布局触发时,就会调用该方法  </li>
+<li>layoutAttributesForElementsInRect:(CGRect)rect 返回在 rect 矩形内的 item 的布局属性数组  </li>
+<li>layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath 返回在某个 indexPath 的 item 的布局属性  </li>
+<li>collectionViewContentSize，返回滚动范围  </li>
+</ol>
+<p>CircleLayout.m </p>
+<pre><code>@interface CircleLayout()
+@end  
+
+@implementation CircleLayout  
+-(void)prepareLayout{
+  [super prepareLayout];     
+}  
+
+-(NSArray&lt;UICollectionViewLayoutAttributes *&gt; *)layoutAttributesForElementsInRect:(CGRect)rect{  
+  return nil;    
+}  
+
+-(UICollectionViewLayoutAttributes   *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath{  
+  return nil;   
+}  
+
+-(CGSize)collectionViewContentSize{
+  return CGSizeZero;  
+}  
+
+-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return YES;
+}  
+
+@end
+</code></pre><p>ok,开始撸我们的布局，先定义图片的宽高，边距</p>
+<pre><code>#define ItemWidth 55  
+#define ItemHieght ItemWidth  
+#define RightMargin 5
+</code></pre><p>again，在prepareLayout中开始计算我们的布局，并且存在一个数组中</p>
+<pre><code>- (void)prepareLayout{
+    [super prepareLayout];
+
+    CGFloat centerX = self.collectionView.contentOffset.x + CGRectGetWidth(self.collectionView.bounds) * .5f;
+    CGFloat centerY = self.collectionView.contentOffset.y + CGRectGetHeight(self.collectionView.bounds) * .5f;
+
+    NSInteger numberOfItem = [self.collectionView numberOfItemsInSection:0];
+
+    NSMutableArray *mAttributesList = [NSMutableArray arrayWithCapacity:numberOfItem];
+
+    for (NSInteger index = 0; index &lt; numberOfItem; index++) {
+
+        NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+
+        UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+        attributes.size = CGSizeMake(ItemWidth, ItemHieght);
+        attributes.center = CGPointMake(centerX,centerY);
+        attributes.transform = CGAffineTransformMakeRotation(M_PI/18.0 * index);
+
+        [mAttributesList addObject:attributes];
+    }
+
+    self.attributesList = [mAttributesList copy];  
+  }
+</code></pre><p>将布局中心点设置为屏幕的中心，<code>CGAffineTransformMakeRotation(M_PI/18.0 * index)</code>设置每个图片的旋转，在这里是为了看清楚有多个图片重叠在一起，否则你只能看到最后一个，因为它们重叠在一起    </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutSimulator%20Screen%20Shot%20Apr%2010%2C%202016%2C%2014.57.49.png" alt="enter image description here">  </p>
+<p>接下来，我们需要将布局变成圆形排列,借用一张图  </p>
+<p><img src="http://cdn2.raywenderlich.com/wp-content/uploads/2015/06/Screenshot-2015-06-01-14.11.42.png" alt="enter image description here">  </p>
+<p>将图片排列在圆弧上，便可得到一个圆形的布局，为了计算方便，我加多了一个圆  </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutB82E4790-BE21-477C-B3C4-3F1191FC1A74.png" alt="enter image description here">    </p>
+<p>外面的圆上的点就是图片的<code>center</code>，好了，现在让脑袋飞回高中，回想一下当年的圆（终于觉得当年学的东西有点作用了）:</p>
+<blockquote>
+<p>圆点坐标：(x0,y0)<br>半径：r<br>角度：a0<br>则圆上任一点为：（x1,y1)<br>x1   =   x0   +   r   <em>   cos(ao   </em>   3.14   /180   )<br>y1   =   y0   +   r   <em>   sin(ao   </em>   3.14   /180   )</p>
+</blockquote>
+<p>好了，万事俱备，只欠代码了,先定义几个属性   </p>
+<pre><code>@property (nonatomic, assign) CGFloat     radius;  
+@property (nonatomic, assign) CGSize      itemSize;  
+@property (nonatomic, assign) CGFloat     anglePerItem;///&lt; 单位夹角   
+
+self.itemSize     = CGSizeMake(ItemWidth, ItemHieght);
+self.radius       = (CGRectGetWidth([UIScreen mainScreen].bounds) - ItemWidth * 2 - RightMargin * 2) * 0.5f;
+self.anglePerItem = M_PI / 4.0;
+</code></pre><p>下一步，实现<code>collectionViewContentSize</code>来声明你的 collectionView 的内容有多大:</p>
+<pre><code>- (CGSize)collectionViewContentSize{
+    NSInteger numberOfItem = [self.collectionView numberOfItemsInSection:0];
+    return CGSizeMake(ItemWidth * numberOfItem, self.collectionView.bounds.size.height);
+</code></pre><p>}</p>
+<p>###自定义布局属性<br>除了新建一个新的布局子类，你还要新建一个继承自UICollectionViewLayoutAttributes的类来存储角位置:</p>
+<pre><code>@interface CircleLayoutAttributes : UICollectionViewLayoutAttributes    
+@property (nonatomic, assign) CGFloat angle;  
+@end  
+
+@implementation CircleLayoutAttributes  
+- (instancetype)init {
+    if (self = [super init]) {
+        self.angle = 0;
+    }
+    return self;  
+}  
+- (void)setAngle:(CGFloat)angle {
+    _angle = angle;
+
+    //1
+    self.zIndex = angle * 1000000;
+    //2
+    self.transform = CGAffineTransformMakeRotation(angle);  
+  }  
+  // UICollectionViewLayoutAttributes 实现 &lt;NSCoping&gt; 协议  
+  - (id)copyWithZone:(NSZone *)zone {
+    CircleLayoutAttributes *copyAttributes = (CircleLayoutAttributes *)[super copyWithZone:zone];
+    copyAttributes.angle = self.angle;
+    return copyAttributes;  
+}  
+@end  
+</code></pre><ol>
+<li>保证后面的cell覆盖在前面的cell上,因为角度用弧度表示，我们将其扩大 1,000,000倍来确保相邻的值不会被四舍五入成同一个 zIndex 值，zIndex 是 Int 型的</li>
+<li>当设置角度（angle）的时候，在内部设置其 transform 旋转 angle 弧度</li>
+</ol>
+<p>我们使用了自定义布局属性，所以我们要告诉布局，喂，以前那老板跑了，换了个新的了：  </p>
+<pre><code>+ (Class)layoutAttributesClass{
+    return [CircleLayoutAttributes class];  
+  }
+</code></pre><p>将我们原来的属性数组更改为：</p>
+<pre><code>@property (nonatomic, copy  ) NSArray&lt;CircleLayoutAttributes *&gt; *attributesList;
+</code></pre><p>好了,继续回到我们的<code>prepareLayout</code>,我们需要修改for循环里面的代码：</p>
+<pre><code>for (NSInteger index = 0; index &lt; numberOfItem; index++) {
+
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+
+    CircleLayoutAttributes *attributes = [CircleLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
+    attributes.size = self.itemSize;
+
+    attributes.center = CGPointMake(
+                                    centerX + self.radius * cosf(self.anglePerItem*index),
+                                    centerY + self.radius * sinf(self.anglePerItem*index)
+                                    );
+
+    attributes.angle = self.anglePerItem * index;
+
+    [mAttributesList addObject:attributes];
+}
+</code></pre><p>运行程序，你会看到所有的 cell 按照圆形来布局了，但是滑动的过程中…等一下，发生了什么？它们被移出了屏幕而不是旋转！？ </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg1.gif" alt="enter image description here">  </p>
+<p>###改善滑动<br>不管怎么说，我们至少完成了第一步圆形布局,yes!<br><img src="http://cdn3.raywenderlich.com/wp-content/uploads/2015/06/ragecomic.png" alt="enter image description here">  </p>
+<p>在<code>CircleLayout</code>中，加入以下代码:</p>
+<pre><code>- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
+    return YES;  
+ }
+</code></pre><p>该方法返回 YES 告知 collectionView 在滑动时布局失效，然后它会调用<code>prepareLayout</code>，进而使用更新后的角位置重新计算 cell 的布局,滑动过程中，contentOffset.x从 0 到collectionViewContentSize.width - CGRectGetWidth(collectionView.bounds)变化,假若第一个图片从当前位置转了一圈回到当前位置，刚好是 <code>2*M_PI</code>，我们可以得出如下:</p>
+<pre><code>偏移的度数 ＝ 滚动的总度数 / contentOffset.x所占的比例  
+CGFloat offsetWidth = self.collectionView.contentSize.width - self.collectionView.bounds.size.width
+offsetAngle = angleTotal * (contentOffset.x / offsetWidth)
+</code></pre><p>即，offsetAngle为contentOffset.x每变化一个单位所需要偏移的度数</p>
+<p>加入以下代码:  </p>
+<pre><code>- (CGFloat)offsetAngle{
+    NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:0];
+    if (numberOfItems &gt; 0) {
+        NSInteger lastItem = numberOfItems;
+        //滚动的总度数
+        CGFloat angleTotal = lastItem * self.anglePerItem;
+        //计算collectionView滑动的距离
+        CGFloat offsetWidth = self.collectionView.contentSize.width - self.collectionView.bounds.size.width;
+        //偏移的度数 ＝ 滚动的总度数 / contentOffsetX所占的比例，即 result = angleTotal * (contentOffsetX / offsetWidth)
+        //(contentOffsetX / offsetWidth)为单位偏移量所占的比例
+        return angleTotal * (self.collectionView.contentOffset.x / offsetWidth);
+    }
+    return 0;  
+  }
+</code></pre><p>然后将<code>prepareLayout</code>中的代码:</p>
+<pre><code>attributes.center = CGPointMake(
+                                    centerX + self.radius * cosf(self.anglePerItem*index),
+                                    centerY + self.radius * sinf(self.anglePerItem*index)                                        );
+
+attributes.angle = self.anglePerItem * index;  
+</code></pre><p>替换为  </p>
+<pre><code>attributes.center = CGPointMake(
+                                    centerX + self.radius * cosf(self.anglePerItem*index + self.offsetAngle),
+                                    centerY + self.radius * sinf(self.anglePerItem*index + self.offsetAngle)                                        );
+
+attributes.angle = self.anglePerItem * index + self.offsetAngle;  
+</code></pre><p> 将滑动的<code>contentOffset.x</code>引起的偏移角度加上,ok,运行，可以滑动了<br> <img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg2.gif" alt="enter image description here">  </p>
+<p>   接下来，我们继续，将风火轮升级成以下效果:  </p>
+<p>   <img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg3.gif" alt="enter image description here">  </p>
+<p>需要将图片按照逆时针排序，并且更改第一张图片的位置：  </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout324893789281.jpg" alt="enter image description here">    ====&gt;<img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout232135454423213.jpg" alt="enter image description here"></p>
+<p>修改代码如下:</p>
+<pre><code>CGFloat changeAngle =  M_PI + M_PI_4;
+attributes.center = CGPointMake(
+                                    centerX + self.radius * cosf(-(self.anglePerItem*index + self.offsetAngle - changeAngle)),
+                                    centerY + self.radius * sinf(-(self.anglePerItem*index + self.offsetAngle - changeAngle))                                        );
+
+attributes.angle = -(self.anglePerItem * index + self.offsetAngle - changeAngle);  
+</code></pre><p>返回的offsetAngle也需要修改为：</p>
+<pre><code>- (CGFloat)offsetAngle{
+    NSInteger numberOfItems = [self.collectionView numberOfItemsInSection:0];
+    if (numberOfItems &gt; 0) {
+        NSInteger lastItem = numberOfItems;
+        //滚动的总度数
+        CGFloat angleTotal = lastItem * self.anglePerItem;
+        //计算collectionView滑动的距离
+        CGFloat offsetWidth = self.collectionView.contentSize.width - self.collectionView.bounds.size.width;
+        //偏移的度数 ＝ 滚动的总度数 / contentOffsetX所占的比例，即 result = angleTotal * (contentOffsetX / offsetWidth)
+        //(contentOffsetX / offsetWidth)为单位偏移量所占的比例
+        return -angleTotal * (self.collectionView.contentOffset.x / offsetWidth);
+    }
+    return 0;  
+  }
+</code></pre><p><code>-</code>代表逆时针</p>
+<p>运行，如图,已经成功变换了位置</p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutSimulator%20Screen%20Shot%20Apr%2010%2C%202016%2C%2020.19.18.png" alt="enter image description here">  </p>
+<p>我们将cell的个数改多一点，会发现，后面的cell盖住了前面的cell，所以，我们需要按需隐藏不相关的cell</p>
+<pre><code>if (attributes.angle &lt;= - M_PI / 6) {
+        CGFloat alpha = ((M_PI / 6 + M_PI/6) + attributes.angle)/(M_PI/6);
+        attributes.alpha = alpha;
+ } else if (attributes.angle &gt; M_PI + M_PI/4) {
+        CGFloat alpha = (M_PI + M_PI/4 + M_PI/6 - attributes.angle) / (M_PI/6);
+        attributes.alpha = alpha;
+ }
+</code></pre><ol>
+<li>图片逆时针旋转，当图片的转角等于30度时<br><code>alpha＝((M_PI / 6 + M_PI/6) + attributes.angle)/(M_PI/6)＝1</code><br>如果继续逆时针转动，<code>alpha</code>会在<code>M_PI/6</code>的转动周期内从1-&gt;0，实现了渐变隐藏  </li>
+<li>图片顺时针旋转，也是同理  </li>
+</ol>
+<p>再次运行   </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg4.gif" alt="enter image description here">  </p>
+<p>但这是会发现, 最后一个 item 可以被滑动的不见, 我们只需要调整一个地方即可, 及第0个 item 的总偏移量, 因为他是根据个数, 让其减去7个 item, 此时便可达到效果, 需要确保总数 &gt; 7   </p>
+<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutimg5.gif" alt="enter image description here"></p>
+<p> 写了一天，大多数都是在别人博客已经有的东西，自己拿过来再重新敲了一遍，还有个必须优化的，<code>layoutAttributesForElementsInRect</code>应该返回可是范围内的cell布局，不应该返回全部，这个后续会完善。<a href="https://github.com/CorzFree/CustomCircleLayout" target="_blank" rel="external">本文demo全部代码在这</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS动画/" rel="tag"># iOS动画</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/20/一个iOS7的bug引发的关于cell的事件处理/" rel="prev" title="一个iOS7的bug引发的关于cell的事件处理">
+                一个iOS7的bug引发的关于cell的事件处理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="corzfree" />
+          <p class="site-author-name" itemprop="name">corzfree</p>
+           
+              <p class="site-description motion-element" itemprop="description">这世界，还有很多不知道的存在</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/CorzFree" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/corzfree" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">corzfree</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("FTuoq1nWkx1S5HIlfIQ6nXOo-gzGzoHsz", "GkesO0zSwM7NYHTqwGU45Eyz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
