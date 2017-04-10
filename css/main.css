@@ -1692,7 +1692,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff95ec;
+  background: #ffff54;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2862,4 +2862,13 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+#header div.header-inner div.site-brand-wrapper {
+  background-image: url("/images/background-cover.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#header div.header-inner div.site-brand-wrapper div.site-meta {
+  background: transparent;
 }
