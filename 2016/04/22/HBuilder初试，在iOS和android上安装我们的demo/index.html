@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutjdiosjdoiajsdiojnkn2n23.jpg">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160422_3-iloveimg-compressed.gif">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout240854CA-74F7-428A-9725-C09A460CC06A.png.jpeg">
-<meta property="og:updated_time" content="2017-04-08T01:16:30.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:10:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HBuilder初试，在iOS和android上安装我们的demo">
 <meta name="twitter:description" content="昨晚一个朋友的路由出问题了，过去帮他重新配置了下，刚好他最近换了家新公司，接触到了HBuilder，期间一直说很好用，虽然我不是做前端的，但看了demo之后也想着玩一把。  
@@ -485,8 +485,7 @@ $(function() {
 </ol>
 <p>以上的工具也可以从<a href="http://pan.baidu.com/s/1qXLSMBi" target="_blank" rel="external">百度云</a>下载     </p>
 <p>我这里是为了使用HBuilder打包然后安装到iOS系统和android系统上，所以需要两个模拟器，当然，如果你有一部iOS系统和一部android系统的手机，你完全可以只下载一个Hbuilder编辑器就开始Coding    </p>
-<p>####genymotion配置 问题</p>
-<p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout20151227223809554.jpg" alt="enter image description here"></p>
+<h4 id="genymotion配置-问题"><a href="#genymotion配置-问题" class="headerlink" title="genymotion配置 问题"></a>genymotion配置 问题</h4><p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout20151227223809554.jpg" alt="enter image description here"></p>
 <p>出现以上问题是因为我们电脑缺少<code>VirtualBox</code>，所以我们需要<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="external">下载VirtualBox</a>  </p>
 <p>Just do it    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout05725020-7861-48FB-BA38-669B7C6D7075.jpg" alt="enter image description here"></p>
@@ -501,19 +500,18 @@ $(function() {
 <p>iOS模拟器比较简单，下载完xcode新建一个工程，选择需要的模拟器运行即可，可以参考<a href="http://jingyan.baidu.com/article/6d704a1313727028db51ca27.html" target="_blank" rel="external">这篇文章</a>来启动模拟器  </p>
 <p>我使用的是iOS 9.3版本的6s    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutjadopjsajsdio2.jpg" alt="enter image description here">  </p>
-<p>###小试牛刀</p>
-<p>打开HBuilder，新建一个移动app，选择mui登录模块:    </p>
+<h3 id="小试牛刀"><a href="#小试牛刀" class="headerlink" title="小试牛刀"></a>小试牛刀</h3><p>打开HBuilder，新建一个移动app，选择mui登录模块:    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout86730733-275F-4F6D-8A17-F782941D96C9.jpg" alt="enter image description here">    </p>
 <p>如图，打开<code>login.html</code>，右上角选择<code>边改边看模式</code>:  </p>
 <p>  <img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutF4C4A13A-D294-4374-A451-C8415874A63A.jpg" alt="enter image description here">  </p>
 <p>ok，可以看到，我们的登录界面已经出现在右边了，接下来，我们要在iOS模拟器和android模拟器上安装我们的app  </p>
-<p>#####iOS模拟器<br>首先根据上面的教程，启动我们的iOS模拟器，然后：</p>
+<h5 id="iOS模拟器"><a href="#iOS模拟器" class="headerlink" title="iOS模拟器"></a>iOS模拟器</h5><p>首先根据上面的教程，启动我们的iOS模拟器，然后：</p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutF887CA9E-CC2C-4894-AFC4-2D735103201B.png-2.jpeg" alt="enter image description here">  </p>
 <p>可以看到我们当前已经启动的iPhone6s模拟器，也可以选择 <code>iOS模拟器运行</code>下面有其它版本的模拟器，安装成功后如下：    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160422_1.gif" alt="enter image description here">  </p>
 <p>至此，我们并没有写到一句代码！接近原生的体验，但是，这里好像有点小问题，侧滑返回的时候，状态栏好像被分隔开了，让我觉得有点像android系统：    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutSimulator%20Screen%20Shot%20Apr%2022,%202016,%2009.47.05.png" alt="enter image description here">  </p>
-<p>#####android模拟器<br>还是一样，先运行<code>genymotion</code>，不然我们在HBuilder找不到它，启动之后稍等一会：    </p>
+<h5 id="android模拟器"><a href="#android模拟器" class="headerlink" title="android模拟器"></a>android模拟器</h5><p>还是一样，先运行<code>genymotion</code>，不然我们在HBuilder找不到它，启动之后稍等一会：    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout8D9B252B-2AC3-460A-9ED1-017863B219AE.png" alt="enter image description here">  </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutjdiosjdoiajsdiojnkn2n23.jpg" alt="enter image description here">  </p>
 <p>HBuilder修改之后按下保存就可以刷新界面，无需重新运行，天哪，这是做原生app所不能做到的，虽然xcode也有<a href="https://github.com/johnno1962/injectionforxcode" target="_blank" rel="external">动态调试</a>，但是有时还是得重新运行一次才能看到效果，下面我们体验一下HBuilder的这个功能:    </p>
@@ -621,8 +619,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -704,6 +711,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#genymotion配置-问题"><span class="nav-number">1.</span> <span class="nav-text">genymotion配置 问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小试牛刀"><span class="nav-number"></span> <span class="nav-text">小试牛刀</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#iOS模拟器"><span class="nav-number">0.1.</span> <span class="nav-text">iOS模拟器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#android模拟器"><span class="nav-number">0.2.</span> <span class="nav-text">android模拟器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

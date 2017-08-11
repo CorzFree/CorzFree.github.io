@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutEDC805FB-3337-4086-AD63-57680E6D2CE2.jpg">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutCC6E809B-9C32-4578-9D9E-EBCDBA273147.jpg">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutE402E112-B205-4CF3-AD1B-C27F1BD27ADE.jpg">
-<meta property="og:updated_time" content="2017-04-08T01:15:18.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:08:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用环信EaseUI，遇到的一些问题">
 <meta name="twitter:description" content="环信的EaseUI里，实现了微信的消息，通讯录两大模块的UI，功能，可说老少兼宜，对比下两者的ui:
@@ -475,14 +475,13 @@ $(function() {
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout20160523_1.jpg" alt="enter image description here"></p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout20160523_2.jpg" alt="enter image description here"></p>
 <p>基本上集成来EaseUI就相当于集成了微信通讯功能，好友功能。具体集成，详见<a href="http://www.easemob.com/" target="_blank" rel="external">环信官网</a><br><a id="more"></a></p>
-<p>####Q1.环信好友关系维护  </p>
-<p>环信维护了一个好友体系，在时间比较紧促的情况下，我们可以使用环信的好友体系，但是，在时间比较充足的情况下，还是建议由我们自己服务器去维护好友体系，因为环信维护的好友体系，仅在需要控制消息发送权限时才启动，而且环信保存的只是环信id，没有头像，昵称这些信息</p>
+<h4 id="Q1-环信好友关系维护"><a href="#Q1-环信好友关系维护" class="headerlink" title="Q1.环信好友关系维护"></a>Q1.环信好友关系维护</h4><p>环信维护了一个好友体系，在时间比较紧促的情况下，我们可以使用环信的好友体系，但是，在时间比较充足的情况下，还是建议由我们自己服务器去维护好友体系，因为环信维护的好友体系，仅在需要控制消息发送权限时才启动，而且环信保存的只是环信id，没有头像，昵称这些信息</p>
 <p>两者对比：  </p>
 <ul>
 <li>环信好友体系，需要使用环信的id去访问自己的服务器，以便获取好友的基本信息(基本的头像，昵称….)  </li>
 <li>自己服务器好友体系，获取好友的时候，直接访问服务器接口，不用访问环信服务器，比较方便</li>
 </ul>
-<p>####Q2.头像昵称<br>环信服务器保存的只是我们的环信id，不支持保存其它信息，我们也不会希望它保存着我们的其它信息，在环信的<a href="https://github.com/easemob/sdkdemoapp3.0_ios/tree/new_dev" target="_blank" rel="external">demo</a>里面，其实已经使用了<strong>Parse</strong>来保存用户的头像昵称，主要代码在<code>UserProfileManager</code>这个类里面：  </p>
+<h4 id="Q2-头像昵称"><a href="#Q2-头像昵称" class="headerlink" title="Q2.头像昵称"></a>Q2.头像昵称</h4><p>环信服务器保存的只是我们的环信id，不支持保存其它信息，我们也不会希望它保存着我们的其它信息，在环信的<a href="https://github.com/easemob/sdkdemoapp3.0_ios/tree/new_dev" target="_blank" rel="external">demo</a>里面，其实已经使用了<strong>Parse</strong>来保存用户的头像昵称，主要代码在<code>UserProfileManager</code>这个类里面：  </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout20160523_3.jpg" alt="enter image description here"></p>
 <p>其中是以环信的id(<code>username</code>)作为key，将头像昵称保存到<strong>Parse</strong>，使用的时候从<strong>Parse</strong>读取，保存在本地的一个<code>NSMutableDictionary</code>中，需要展示的时候，通过环信id(<code>username</code>)来获取对应的信息，具体可以看下<code>UserProfileManager.m</code>的实现  </p>
 <p> 不过我们还是使用我们自己服务器来保存这些信息，防止数据错乱，如果使用<strong>Parse</strong>，在更新自己服务器头像昵称的同时还需要更新<strong>Parse</strong>上的信息，而且<a href="http://community.easemob.com/article/825307771" target="_blank" rel="external"><strong>Parse</strong>也快到期了</a>，比较麻烦，所以我们可以参照<code>UserProfileManager</code>，自己实现好友头像昵称的本地缓存，在环信的论坛已经有人发表了相关的文章：<a href="http://community.easemob.com/article/825307632" target="_blank" rel="external">iOS开发小记：关于环信Demo3.0的使用总结以及昵称和头像问题的研究与解决</a>，以下是在这文章的基础上，自己增加了两个更新本地头像昵称的方法，目前这些信息是存储在<code>NSUserDefaults</code>中    </p>
@@ -659,8 +658,7 @@ static CacheData* _instance = nil;
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutCC6E809B-9C32-4578-9D9E-EBCDBA273147.jpg" alt="enter image description here"></p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutE402E112-B205-4CF3-AD1B-C27F1BD27ADE.jpg" alt="enter image description here">  </p>
 <p>是通过扩展消息去获取的，但是这有一个缺点，就是当对方更改了昵称或者头像的时候，之前的聊天记录的头像或者昵称还是旧的，并不会改变，由于项目比较赶，只能跟随着安卓端通过扩展消息去获取了，这个待到后面有时间必须优化</p>
-<p>####Q3.自动加入公开群后，提示XXX邀请你加入群组  </p>
-<pre><code>//SDK自动同意了用户A的加B入群邀请后，用户B接收到该回调
+<h4 id="Q3-自动加入公开群后，提示XXX邀请你加入群组"><a href="#Q3-自动加入公开群后，提示XXX邀请你加入群组" class="headerlink" title="Q3.自动加入公开群后，提示XXX邀请你加入群组"></a>Q3.自动加入公开群后，提示XXX邀请你加入群组</h4><pre><code>//SDK自动同意了用户A的加B入群邀请后，用户B接收到该回调
 - (void)didJoinedGroup:(EMGroup *)aGroup
                inviter:(NSString *)aInviter
                message:(NSString *)aMessage
@@ -692,7 +690,7 @@ static CacheData* _instance = nil;
 }];
 }
 </code></pre><p><code>convertToNicknameWithUsrname</code>是通过环信id去获取用户的昵称  </p>
-<p>####Q4.使用po查看一些变量时use of undeclared identifier ‘XX’<br><a href="http://stackoverflow.com/questions/36468615/how-to-debug-member-variable-ie-array-dictionary-in-lldb" target="_blank" rel="external">How to debug member variable (ie., Array, Dictionary) in LLDB?</a>    </p>
+<h4 id="Q4-使用po查看一些变量时use-of-undeclared-identifier-‘XX’"><a href="#Q4-使用po查看一些变量时use-of-undeclared-identifier-‘XX’" class="headerlink" title="Q4.使用po查看一些变量时use of undeclared identifier ‘XX’"></a>Q4.使用po查看一些变量时use of undeclared identifier ‘XX’</h4><p><a href="http://stackoverflow.com/questions/36468615/how-to-debug-member-variable-ie-array-dictionary-in-lldb" target="_blank" rel="external">How to debug member variable (ie., Array, Dictionary) in LLDB?</a>    </p>
 
       
     </div>
@@ -794,8 +792,17 @@ static CacheData* _instance = nil;
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -877,6 +884,22 @@ static CacheData* _instance = nil;
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-环信好友关系维护"><span class="nav-number">1.</span> <span class="nav-text">Q1.环信好友关系维护</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-头像昵称"><span class="nav-number">2.</span> <span class="nav-text">Q2.头像昵称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-自动加入公开群后，提示XXX邀请你加入群组"><span class="nav-number">3.</span> <span class="nav-text">Q3.自动加入公开群后，提示XXX邀请你加入群组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-使用po查看一些变量时use-of-undeclared-identifier-‘XX’"><span class="nav-number">4.</span> <span class="nav-text">Q4.使用po查看一些变量时use of undeclared identifier ‘XX’</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

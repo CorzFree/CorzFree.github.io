@@ -87,14 +87,30 @@
 
 
 
-<meta name="description" content="iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:- 语音和视频通话- 发送消息- 收款或者付款- 图片搜索- 管理锻炼- 行程预约下面开始看看怎么撩Siri">
+<meta name="description" content="iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:  
+
+语音和视频通话
+发送消息
+收款或者付款
+图片搜索
+管理锻炼
+行程预约  
+
+下面开始看看怎么撩Siri">
 <meta property="og:type" content="article">
 <meta property="og:title" content="撩起Siri">
 <meta property="og:url" content="http://yoursite.com/2016/10/05/撩起Siri/index.html">
 <meta property="og:site_name" content="蔡锐炜的小黑屋">
-<meta property="og:description" content="iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:- 语音和视频通话- 发送消息- 收款或者付款- 图片搜索- 管理锻炼- 行程预约下面开始看看怎么撩Siri">
-<meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/IMG_471
-8.JPG?imageView2/2/w/308/h/210/interlace/1/q/100">
+<meta property="og:description" content="iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:  
+
+语音和视频通话
+发送消息
+收款或者付款
+图片搜索
+管理锻炼
+行程预约  
+
+下面开始看看怎么撩Siri">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/F901B091-E483-4B1D-9BAE-AD4497E7D812.png.jpeg">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-1.jpeg">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-2.jpeg">
@@ -106,12 +122,20 @@
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-10-1.jpg">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-10-3.png">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-10-2.jpg.png">
-<meta property="og:updated_time" content="2017-04-08T01:12:30.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:06:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="撩起Siri">
-<meta name="twitter:description" content="iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:- 语音和视频通话- 发送消息- 收款或者付款- 图片搜索- 管理锻炼- 行程预约下面开始看看怎么撩Siri">
-<meta name="twitter:image" content="http://7xrlno.com1.z0.glb.clouddn.com/IMG_471
-8.JPG?imageView2/2/w/308/h/210/interlace/1/q/100">
+<meta name="twitter:description" content="iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:  
+
+语音和视频通话
+发送消息
+收款或者付款
+图片搜索
+管理锻炼
+行程预约  
+
+下面开始看看怎么撩Siri">
+<meta name="twitter:image" content="http://7xrlno.com1.z0.glb.clouddn.com/F901B091-E483-4B1D-9BAE-AD4497E7D812.png.jpeg">
 
 
 
@@ -470,11 +494,41 @@ $(function() {
       
 
       
-        <div style="width:80%;height:0px;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/IMG_471
-8.JPG?imageView2/2/w/308/h/210/interlace/1/q/100" heigh="0" style="display:none"><br></div><br>iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:<br><br>- 语音和视频通话<br>- 发送消息<br>- 收款或者付款<br>- 图片搜索<br>- 管理锻炼<br>- 行程预约<br><br>下面开始看看怎么撩Siri<br><br><a id="more"></a><br>###创建 Intents Extension<br><br>与<code>SiriKit</code>的互动是通过<code>Intents Extension</code>实现的，我们需要创建一个<code>Intents Extension</code>来与<code>Siri</code>互动并响应操作，所以，在此之前你必须有一个<code>app</code>，或者新建一个项目<br><br>为已有项目添加<code>Intents Extension</code>，有以下几点：<br><br>  - 把项目<code>Capability</code>的<code>Siri</code>启用；见<a href="#xcode_config">Xcode项目设置</a><br>  - 在项目中添加一个<code>Intents Extension</code>，并且在<code>Info.plist</code>中进行配置；见<a href="#xcode_config">Xcode项目设置</a><br>  - 请求<code>Siri</code>权限；见<a href="#request_auth_siri">请求Siri权限</a><br>  - 定义一个处理<code>intents</code>的对象；见<a href="#handle_intents">处理Intents</a><br>  - 定义一些自定义的词汇；见<a href="https://developer.apple.com/library/prerelease/content/documentation/Intents/Conceptual/SiriIntegrationGuide/SpecifyingCustomVocabulary.html#//apple_ref/doc/uid/TP40016875-CH6-SW1" target="_blank" rel="external">自定义词汇</a><br><br>    &gt; <strong>注：</strong><br>    &gt; 你可以在项目中添加一个<code>Intents UI extension</code>来自定义<code>Siri</code>或者<code>地图</code>的显示界面，<code>Intents UI extension</code>不能代替<code>Intents Extension</code>，两者是不同的东西，有关<code>Intents UI Extension</code>，见<a href="#intents_ui">创建Intents UI Extension</a><br><br>###<span id="xcode_config">Xcode项目设置</span><br>除了添加一个<code>Intents extension target</code>到你的项目中，你还需要做一些设置<br><br>要使用<code>SiriKit</code>，你必须启用<code>Siri capability</code>， 就像启用<code>iCloud</code>，<code>push notifications(通知)</code>,<code>in-app purchase(应用内购买)</code>，让<strong>App Store</strong>知道你的app支持<code>Siri</code><br><br>####<strong>在app中启用Siri功能</strong><br>1. 在Xcode中打开项目<br>2. 在项目设置中，选中app的target<br>3. 切换到Capabilities这一项<br>4. 找到Siri这一项，启用<br><br><div style="width:80%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/F901B091-E483-4B1D-9BAE-AD4497E7D812.png.jpeg"><br></div>
+        <p>iOS 10 来了，Siri也有了大变化，可以让Siri帮我们发消息，开始锻炼，具体有如下六类服务:  </p>
+<ul>
+<li>语音和视频通话</li>
+<li>发送消息</li>
+<li>收款或者付款</li>
+<li>图片搜索</li>
+<li>管理锻炼</li>
+<li>行程预约  </li>
+</ul>
+<p>下面开始看看怎么撩Siri</p>
+<a id="more"></a>
+<h3 id="创建-Intents-Extension"><a href="#创建-Intents-Extension" class="headerlink" title="创建 Intents Extension"></a>创建 Intents Extension</h3><p>与<code>SiriKit</code>的互动是通过<code>Intents Extension</code>实现的，我们需要创建一个<code>Intents Extension</code>来与<code>Siri</code>互动并响应操作，所以，在此之前你必须有一个<code>app</code>，或者新建一个项目</p>
+<p>为已有项目添加<code>Intents Extension</code>，有以下几点：  </p>
+<ul>
+<li>把项目<code>Capability</code>的<code>Siri</code>启用；见<a href="#xcode_config">Xcode项目设置</a></li>
+<li>在项目中添加一个<code>Intents Extension</code>，并且在<code>Info.plist</code>中进行配置；见<a href="#xcode_config">Xcode项目设置</a></li>
+<li>请求<code>Siri</code>权限；见<a href="#request_auth_siri">请求Siri权限</a></li>
+<li>定义一个处理<code>intents</code>的对象；见<a href="#handle_intents">处理Intents</a></li>
+<li><p>定义一些自定义的词汇；见<a href="https://developer.apple.com/library/prerelease/content/documentation/Intents/Conceptual/SiriIntegrationGuide/SpecifyingCustomVocabulary.html#//apple_ref/doc/uid/TP40016875-CH6-SW1" target="_blank" rel="external">自定义词汇</a>  </p>
+<blockquote>
+<p><strong>注：</strong><br>你可以在项目中添加一个<code>Intents UI extension</code>来自定义<code>Siri</code>或者<code>地图</code>的显示界面，<code>Intents UI extension</code>不能代替<code>Intents Extension</code>，两者是不同的东西，有关<code>Intents UI Extension</code>，见<a href="#intents_ui">创建Intents UI Extension</a>  </p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Xcode项目设置"><a href="#Xcode项目设置" class="headerlink" title="Xcode项目设置"></a><span id="xcode_config">Xcode项目设置</span></h3><p>除了添加一个<code>Intents extension target</code>到你的项目中，你还需要做一些设置</p>
+<p>要使用<code>SiriKit</code>，你必须启用<code>Siri capability</code>， 就像启用<code>iCloud</code>，<code>push notifications(通知)</code>,<code>in-app purchase(应用内购买)</code>，让<strong>App Store</strong>知道你的app支持<code>Siri</code>  </p>
+<h4 id="在app中启用Siri功能"><a href="#在app中启用Siri功能" class="headerlink" title="在app中启用Siri功能"></a><strong>在app中启用Siri功能</strong></h4><ol>
+<li>在Xcode中打开项目  </li>
+<li>在项目设置中，选中app的target</li>
+<li>切换到Capabilities这一项</li>
+<li>找到Siri这一项，启用  </li>
+</ol>
+<div style="width:80%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/F901B091-E483-4B1D-9BAE-AD4497E7D812.png.jpeg"><br></div>
 
-<p>####<strong>在项目中新增一个<code>Intents extension target</code></strong>     </p>
-<ol>
+<h4 id="在项目中新增一个Intents-extension-target"><a href="#在项目中新增一个Intents-extension-target" class="headerlink" title="在项目中新增一个Intents extension target"></a><strong>在项目中新增一个<code>Intents extension target</code></strong></h4><ol>
 <li>在Xcode中打开项目</li>
 <li>选择 File &gt; New &gt; Target</li>
 <li>选择 Intents extension </li>
@@ -489,8 +543,7 @@ $(function() {
 <div style="width:80%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-1.jpeg"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-2.jpeg"><br></div>
 
 
-<p>####<strong>指定扩展(extension)支持的Intents</strong>    </p>
-<ol>
+<h4 id="指定扩展-extension-支持的Intents"><a href="#指定扩展-extension-支持的Intents" class="headerlink" title="指定扩展(extension)支持的Intents"></a><strong>指定扩展(extension)支持的Intents</strong></h4><ol>
 <li>在Xcode中，选择新创建的 <code>Intents extension</code>中的<code>Info.plist</code>文件</li>
 <li>点击展开<code>NSExtension</code>，然后展开<code>NSExtensionAttributes</code>，可以看到有<code>IntentsSupported</code> 和 <code>IntentsRestrictedWhileLocked</code> 这两个键</li>
 <li>在<code>IntentsSupported</code>下，每一个字符串表示的是应用扩展处理的<code>Intent</code>事件的类名，我们需要为每个扩展都添加一行（<strong>这个必须设置</strong>)</li>
@@ -499,17 +552,16 @@ $(function() {
 <div style="width:80%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-3.png.jpeg"><br></div>
 
 <p>当用户说出了一些语义相似的话，也许会启用多个扩展，这时候，会根据在IntentsSupported下面的数组的顺序决定哪个扩展先响应，所以，当你有一个Intents非常重要需要先响应，你需要将它在数组中靠前排列</p>
-<p>###<span id="request_auth_siri">请求Siri权限</span>    </p>
-<p>用户必须授予应用程序的权限使用SiriKit。要请求您的应用程序的权限，如下:  </p>
+<h3 id="请求Siri权限"><a href="#请求Siri权限" class="headerlink" title="请求Siri权限"></a><span id="request_auth_siri">请求Siri权限</span></h3><p>用户必须授予应用程序的权限使用SiriKit。要请求您的应用程序的权限，如下:  </p>
 <ul>
 <li>在项目的<code>Info.plist</code>加入一行，键为<code>NSSiriUsageDescription</code>，值为请求访问<code>Siri</code>权限时，弹出框的文字，例如:允许app访问Siri以完成更多操作</li>
 <li>调用<code>INPreferences</code>类的<code>requestSiriAuthorization:</code>方法请求授权</li>
 </ul>
 <p>当你第一次调用 <code>requestSiriAuthorization</code>的时候，系统将弹出一个请求授权的对话框让用户授权你的<code>app</code>，对话框的描述内容就是你在<code>Info.plist</code>文件中的<code>NSSiriUsageDescription</code>对应的值，用户可以批准或者拒绝你的请求授权，随后也可以在系统设置里面修改授权状态，当你再次调用<code>requestSiriAuthorization</code>时，系统会记住用户之前的授权状态而不会再次提示用户进行授权</p>
-<p>###<span id="test_extension">测试extension</span><br>先把我们自己的<code>app</code>跑起来，然后运行扩展(<code>extension</code>)，会看到如下窗口:  </p>
+<h3 id="测试extension"><a href="#测试extension" class="headerlink" title="测试extension"></a><span id="test_extension">测试extension</span></h3><p>先把我们自己的<code>app</code>跑起来，然后运行扩展(<code>extension</code>)，会看到如下窗口:  </p>
 <div style="width:80%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-5.png.jpeg"><br></div><br>选择我们自己的<code>app</code>，开始run，在run起来的程序中请求授权:<br><br><div style="width:191px;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-6.png.jpeg"><br></div><br><div style="width:80%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-06-7.png.jpeg"><br></div>
 
-<p>###<span id="handle_intents">处理Intents</span><br>当我们实现了Intents extension扩展并产生了一个Siri请求事件时，一个典型的Intent事件的处理过程中总共有这三个步骤<code>Resolve</code>、<code>Confirm</code>和<code>Handle</code>：  </p>
+<h3 id="处理Intents"><a href="#处理Intents" class="headerlink" title="处理Intents"></a><span id="handle_intents">处理Intents</span></h3><p>当我们实现了Intents extension扩展并产生了一个Siri请求事件时，一个典型的Intent事件的处理过程中总共有这三个步骤<code>Resolve</code>、<code>Confirm</code>和<code>Handle</code>：  </p>
 <ul>
 <li>Resolve阶段。在Siri获取到用户的语音输入之后，生成一个INIntent对象，将语音中的关键信息提取出来并且填充对应的属性。这个对象在稍后会传递给我们设置好的INExtension子类对象进行处理，根据子类遵循的不同服务protocol来选择不同的解决方案  </li>
 <li>Confirm阶段。在上一个阶段通过handler(for intent:)返回了处理intent的对象，此阶段会依次调用confirm打头的实例方法来判断Siri填充的信息是否完成。匹配的判断结果包括Exactly one match、Two or more matches以及No match三种情况。这个过程中可以让Siri向用户征求更具体的参数信息  </li>
@@ -517,7 +569,7 @@ $(function() {
 
 </li>
 </ul>
-<p>####<strong>Resolve</strong><br>这个阶段需要我们找到消息的具体接收者。在这个过程中，可能会出现三种情况：Exactly one match、Two or more matches以及No matches，对于这三种情况的处理，代码如下： </p>
+<h4 id="Resolve"><a href="#Resolve" class="headerlink" title="Resolve"></a><strong>Resolve</strong></h4><p>这个阶段需要我们找到消息的具体接收者。在这个过程中，可能会出现三种情况：Exactly one match、Two or more matches以及No matches，对于这三种情况的处理，代码如下： </p>
 <pre><code>func resolveRecipients(forSendMessage intent: INSendMessageIntent, with completion: @escaping ([INPersonResolutionResult]) -&gt; Void) {
 
     if let recipients = intent.recipients {
@@ -573,7 +625,7 @@ $(function() {
         completion(INStringResolutionResult.needsValue())
     }
 }
-</code></pre><p>####<strong>Confirm</strong><br>在该阶段，我们检测用户的登录状态，以决定是否发送消息，在这个阶段，你可以最后一次修改<code>Intent</code>内容，未登录时，我们传入<code>failureRequiringAppLaunch</code>启动<code>app</code>进行相应的登录操作:  </p>
+</code></pre><h4 id="Confirm"><a href="#Confirm" class="headerlink" title="Confirm"></a><strong>Confirm</strong></h4><p>在该阶段，我们检测用户的登录状态，以决定是否发送消息，在这个阶段，你可以最后一次修改<code>Intent</code>内容，未登录时，我们传入<code>failureRequiringAppLaunch</code>启动<code>app</code>进行相应的登录操作:  </p>
 <pre><code>func confirm(sendMessage intent: INSendMessageIntent, completion: @escaping (INSendMessageIntentResponse) -&gt; Void) {
 
     if hasLogin() {
@@ -587,7 +639,7 @@ $(function() {
         completion(INSendMessageIntentResponse(code: .failureRequiringAppLaunch, userActivity: userActivity))
     }
 }
-</code></pre><p>####<strong>Handle</strong><br>到了这个阶段，检查下各项信息是否为空，调用api去发送消息，有必要的时候保存数据，然后反馈任务状态给<code>Siri</code>：</p>
+</code></pre><h4 id="Handle"><a href="#Handle" class="headerlink" title="Handle"></a><strong>Handle</strong></h4><p>到了这个阶段，检查下各项信息是否为空，调用api去发送消息，有必要的时候保存数据，然后反馈任务状态给<code>Siri</code>：</p>
 <pre><code> func handle(sendMessage intent: INSendMessageIntent, completion: @escaping (INSendMessageIntentResponse) -&gt; Void) {
 
     if intent.recipients != nil &amp;&amp; intent.content != nil {
@@ -602,8 +654,7 @@ $(function() {
 </code></pre><p>运行之后：  </p>
 <div style="width:80%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-10-1.jpg"><br></div>
 
-<p>###<span id="intents_ui">创建Intents UI Extension</span></p>
-<p>上一步创建<code>Intents Extension</code>的时候我们已经创建了<code>Intents UI Extension</code>了，这里，我们可以改变展示的<code>ui</code>,在<code>Storyboard</code>里面加入一个<code>label</code></p>
+<h3 id="创建Intents-UI-Extension"><a href="#创建Intents-UI-Extension" class="headerlink" title="创建Intents UI Extension"></a><span id="intents_ui">创建Intents UI Extension</span></h3><p>上一步创建<code>Intents Extension</code>的时候我们已经创建了<code>Intents UI Extension</code>了，这里，我们可以改变展示的<code>ui</code>,在<code>Storyboard</code>里面加入一个<code>label</code></p>
 <div style="width:191px;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/2016-10-10-3.png"><br></div>
 
 <p>运行:</p>
@@ -712,8 +763,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -795,6 +855,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建-Intents-Extension"><span class="nav-number">1.</span> <span class="nav-text">创建 Intents Extension</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xcode项目设置"><span class="nav-number">2.</span> <span class="nav-text">Xcode项目设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#在app中启用Siri功能"><span class="nav-number">2.1.</span> <span class="nav-text">在app中启用Siri功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在项目中新增一个Intents-extension-target"><span class="nav-number">2.2.</span> <span class="nav-text">在项目中新增一个Intents extension target</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指定扩展-extension-支持的Intents"><span class="nav-number">2.3.</span> <span class="nav-text">指定扩展(extension)支持的Intents</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求Siri权限"><span class="nav-number">3.</span> <span class="nav-text">请求Siri权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试extension"><span class="nav-number">4.</span> <span class="nav-text">测试extension</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理Intents"><span class="nav-number">5.</span> <span class="nav-text">处理Intents</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Resolve"><span class="nav-number">5.1.</span> <span class="nav-text">Resolve</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Confirm"><span class="nav-number">5.2.</span> <span class="nav-text">Confirm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Handle"><span class="nav-number">5.3.</span> <span class="nav-text">Handle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建Intents-UI-Extension"><span class="nav-number">6.</span> <span class="nav-text">创建Intents UI Extension</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

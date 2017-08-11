@@ -114,7 +114,7 @@ CollectionView自定义风火轮">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2FcustomcirclelayoutSimulator%20Screen%20Shot%20Apr%2010%2C%202016%2C%2020.19.18.png">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg4.gif">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutimg5.gif">
-<meta property="og:updated_time" content="2017-04-08T01:12:14.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:05:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="风火轮是怎么练成的">
 <meta name="twitter:description" content="之前使用CollectionView一直使用默认的UICollectionViewLayout，殊不知CollectionViewLayout还可以玩出花，比如:    
@@ -490,7 +490,7 @@ $(function() {
 <a id="more"></a>
 <p>看了几篇文章之后，便想跟着<a href="http://www.jianshu.com/p/455981779117" target="_blank" rel="external">CollectionView自定义风火轮</a>也撸个风火轮出来，如图:<br><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutimg5.gif" alt="alt"><br>开始之前，还是先了解一下自定义UICollectionViewLayout的相关知识，你可以看<a href="http://www.cocoachina.com/industry/20131122/7401.html" target="_blank" rel="external">自定义CollectionViewLayout</a>这篇教程。</p>
 <hr>
-<p>##coding<br>下载我们的<a href="https://github.com/CorzFree/StartDemo-CustomCircleLayout/archive/master.zip" target="_blank" rel="external">初始工程</a></p>
+<h2 id="coding"><a href="#coding" class="headerlink" title="coding"></a>coding</h2><p>下载我们的<a href="https://github.com/CorzFree/StartDemo-CustomCircleLayout/archive/master.zip" target="_blank" rel="external">初始工程</a></p>
 <p>CircleLayout为我们自定义的布局，现在里面什么都没有，运行我们的项目。  </p>
 <p>界面是一片空白，尽管我们在ViewController中配置了数据源也返回了相对应的Cell视图，但是CollectionView不知道怎么去显示它们，接下来我们开始我们的风火轮之旅。  </p>
 <p>打开CircleLayout.m，我们需要重写以下几个方法:   </p>
@@ -578,7 +578,7 @@ self.anglePerItem = M_PI / 4.0;
     NSInteger numberOfItem = [self.collectionView numberOfItemsInSection:0];
     return CGSizeMake(ItemWidth * numberOfItem, self.collectionView.bounds.size.height);
 </code></pre><p>}</p>
-<p>###自定义布局属性<br>除了新建一个新的布局子类，你还要新建一个继承自UICollectionViewLayoutAttributes的类来存储角位置:</p>
+<h3 id="自定义布局属性"><a href="#自定义布局属性" class="headerlink" title="自定义布局属性"></a>自定义布局属性</h3><p>除了新建一个新的布局子类，你还要新建一个继承自UICollectionViewLayoutAttributes的类来存储角位置:</p>
 <pre><code>@interface CircleLayoutAttributes : UICollectionViewLayoutAttributes    
 @property (nonatomic, assign) CGFloat angle;  
 @end  
@@ -634,7 +634,7 @@ self.anglePerItem = M_PI / 4.0;
 }
 </code></pre><p>运行程序，你会看到所有的 cell 按照圆形来布局了，但是滑动的过程中…等一下，发生了什么？它们被移出了屏幕而不是旋转！？ </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayoutimg1.gif" alt="enter image description here">  </p>
-<p>###改善滑动<br>不管怎么说，我们至少完成了第一步圆形布局,yes!<br><img src="http://cdn3.raywenderlich.com/wp-content/uploads/2015/06/ragecomic.png" alt="enter image description here">  </p>
+<h3 id="改善滑动"><a href="#改善滑动" class="headerlink" title="改善滑动"></a>改善滑动</h3><p>不管怎么说，我们至少完成了第一步圆形布局,yes!<br><img src="http://cdn3.raywenderlich.com/wp-content/uploads/2015/06/ragecomic.png" alt="enter image description here">  </p>
 <p>在<code>CircleLayout</code>中，加入以下代码:</p>
 <pre><code>- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
     return YES;  
@@ -815,8 +815,17 @@ attributes.angle = -(self.anglePerItem * index + self.offsetAngle - changeAngle)
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -898,6 +907,22 @@ attributes.angle = -(self.anglePerItem * index + self.offsetAngle - changeAngle)
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#coding"><span class="nav-number">1.</span> <span class="nav-text">coding</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义布局属性"><span class="nav-number">1.1.</span> <span class="nav-text">自定义布局属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改善滑动"><span class="nav-number">1.2.</span> <span class="nav-text">改善滑动</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -87,8 +87,7 @@
 
 
 
-<meta name="description" content="##CALayer
-
+<meta name="description" content="CALayer
 CALayer用来在屏幕上显示和做动画，UIView仅仅是对CALayer的一个封装，可以通过UIView的高级API间接地使得动画变得很简单    
 
 UIView没有暴露出来的CALayer的功能:
@@ -102,8 +101,7 @@ UIView没有暴露出来的CALayer的功能:
 <meta property="og:title" content="iOS核心动画高级技巧笔记(一)">
 <meta property="og:url" content="http://yoursite.com/2016/07/25/iOS核心动画高级技巧笔记-一/index.html">
 <meta property="og:site_name" content="蔡锐炜的小黑屋">
-<meta property="og:description" content="##CALayer
-
+<meta property="og:description" content="CALayer
 CALayer用来在屏幕上显示和做动画，UIView仅仅是对CALayer的一个封装，可以通过UIView的高级API间接地使得动画变得很简单    
 
 UIView没有暴露出来的CALayer的功能:
@@ -120,11 +118,10 @@ UIView没有暴露出来的CALayer的功能:
 <meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png">
 <meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.18.png">
 <meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.20.png">
-<meta property="og:updated_time" content="2017-04-08T01:16:39.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:10:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS核心动画高级技巧笔记(一)">
-<meta name="twitter:description" content="##CALayer
-
+<meta name="twitter:description" content="CALayer
 CALayer用来在屏幕上显示和做动画，UIView仅仅是对CALayer的一个封装，可以通过UIView的高级API间接地使得动画变得很简单    
 
 UIView没有暴露出来的CALayer的功能:
@@ -493,8 +490,7 @@ $(function() {
       
 
       
-        <p>##<strong>CALayer</strong></p>
-<ul>
+        <h2 id="CALayer"><a href="#CALayer" class="headerlink" title="CALayer"></a><strong>CALayer</strong></h2><ul>
 <li><p><code>CALayer</code>用来在屏幕上显示和做动画，<code>UIView</code>仅仅是对<code>CALayer</code>的一个封装，可以通过<code>UIView</code>的高级API间接地使得动画变得很简单    </p>
 </li>
 <li><p><code>UIView</code>没有暴露出来的<code>CALayer</code>的功能:</p>
@@ -550,8 +546,7 @@ $(function() {
 </li>
 </ul>
 <hr>
-<p>##<strong>视觉效果</strong></p>
-<ul>
+<h2 id="视觉效果"><a href="#视觉效果" class="headerlink" title="视觉效果"></a><strong>视觉效果</strong></h2><ul>
 <li><p><strong>阴影</strong></p>
 <ul>
 <li><p><strong>shadowOpacity</strong>：设置大于默认值（也就是0）的值，阴影就可以显示，//0.0（不可见） 1.0（完全不透明）</p>
@@ -605,8 +600,7 @@ $(function() {
 </li>
 </ul>
 <hr>
-<p>##<strong>变换</strong></p>
-<ul>
+<h2 id="变换"><a href="#变换" class="headerlink" title="变换"></a><strong>变换</strong></h2><ul>
 <li><p><strong>仿射变换</strong></p>
 <ul>
 <li>混合变换，变换的顺序会影响最终的结果，也就是说旋转之后的平移和平移之后的旋转结果可能不同    </li>
@@ -627,8 +621,7 @@ $(function() {
 </li>
 </ul>
 <hr>
-<p>##<strong>专用图层</strong></p>
-<ul>
+<h2 id="专用图层"><a href="#专用图层" class="headerlink" title="专用图层"></a><strong>专用图层</strong></h2><ul>
 <li><p><a href="https://zsisme.gitbooks.io/ios-/content/chapter6/cashapelayer.html" target="_blank" rel="external">CAShapeLayer</a> - 通过矢量图形而不是bitmap来绘制的图层子类</p>
 <ul>
 <li><p><strong>优点</strong>：</p>
@@ -815,8 +808,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -898,6 +900,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CALayer"><span class="nav-number">1.</span> <span class="nav-text">CALayer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视觉效果"><span class="nav-number">2.</span> <span class="nav-text">视觉效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变换"><span class="nav-number">3.</span> <span class="nav-text">变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#专用图层"><span class="nav-number">4.</span> <span class="nav-text">专用图层</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -96,7 +96,7 @@
 <meta property="og:description" content="现在，人们玩的都是套路，谁套谁又套住了谁，莫言谁是，莫怨谁非  
 不止是人，这个世界，何尝不可看成命运的连环套呢">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/u=696846825,885884703&fm=21&gp=0.jpg">
-<meta property="og:updated_time" content="2017-04-08T01:15:30.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:09:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="事件穿透">
 <meta name="twitter:description" content="现在，人们玩的都是套路，谁套谁又套住了谁，莫言谁是，莫怨谁非  
@@ -467,14 +467,13 @@ $(function() {
 <p>这个世界，到底是什么样的？—-《天才在左疯子在右》</p>
 <p>换个角度看这个世界，我是否可以把昨晚发生的一切，当成是世界，命运的一个套路？而且，是必须进入这个套路之中，大至世界尚且如此，在世界之下的<code>前端技术</code>，也是自有套路</p>
 <hr>
-<p>##事件穿透</p>
-<p>事件穿透，事件冒泡，都是属于事件传递的一种方式，冒泡是按照一定的顺序传递，而穿透呢，不走寻常路，可上可下，具体要看页面内容分布</p>
+<h2 id="事件穿透"><a href="#事件穿透" class="headerlink" title="事件穿透"></a>事件穿透</h2><p>事件穿透，事件冒泡，都是属于事件传递的一种方式，冒泡是按照一定的顺序传递，而穿透呢，不走寻常路，可上可下，具体要看页面内容分布</p>
 <p>周五刚好有个同事说他写的跳转在微信运行总是一闪而过，抑制不住内心的好奇，就跑过去看看，说也奇怪，在<code>Google</code>浏览器里面正常跳转，跑到微信上就见鬼了，像个羞答答的新娘子，盖头一掀，还没看清就又盖上了，一来二去弄得心痒痒的</p>
 <p>拿来代码，跑起来，一个列表页，点击进去详情，再点击按钮，进入一个新页面，很简单的逻辑，一开始以为是跳转代码的问题，但是看了列表页的跳转之后就排除了，研究了好一会还是百思不得其姐，好吧，孔子说，不耻下问，去问下有经验的人，说不定人家一句话就顶你一天瞎折腾了</p>
 <p>和他描述了问题之后，给了代码之后他一开始也没找到问题，就在我心灰意冷，万念俱灰的时候，他突然很开心的说：“我知道了，事件穿透，哈哈哈哈”，马上搜索事件穿透的相关资料，发现是因为这个页面混用了<code>touch</code>和<code>click</code>，由于在移动端有<code>300ms</code>的延迟，所以发生了事件穿透，引起了这一奇异现象，将<code>click</code>换成<code>tap</code>之后，问题解决了</p>
-<p>###click与300ms延迟<br>移动浏览器提供一个特殊的功能：双击（double tap）放大</p>
+<h3 id="click与300ms延迟"><a href="#click与300ms延迟" class="headerlink" title="click与300ms延迟"></a>click与300ms延迟</h3><p>移动浏览器提供一个特殊的功能：双击（double tap）放大</p>
 <p>300ms的延迟就来自这里，用户碰触页面之后，需要等待一段时间来判断是不是双击（double tap）动作，而不是立即响应单击（click），等待的这段时间大约是300ms，因此，点击穿透的现象就容易理解了，在这 300ms 以内，因为上层元素隐藏或消失了，由于 click 事件的滞后性，同样位置的 DOM 元素触发了 click 事件</p>
-<p>###自己的解决方案<br>在新页面中，将发生事件穿透位置的<code>click</code>，换成<code>tap</code>，在微信运行正常，</p>
+<h3 id="自己的解决方案"><a href="#自己的解决方案" class="headerlink" title="自己的解决方案"></a>自己的解决方案</h3><p>在新页面中，将发生事件穿透位置的<code>click</code>，换成<code>tap</code>，在微信运行正常，</p>
 <p>参考:  </p>
 <ul>
 <li><a href="http://www.ayqy.net/blog/%E7%A7%BB%E5%8A%A8%E9%A1%B5%E9%9D%A2%E7%82%B9%E5%87%BB%E7%A9%BF%E9%80%8F%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_blank" rel="external">移动页面点击穿透问题解决方案</a>  </li>
@@ -583,8 +582,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -666,6 +674,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事件穿透"><span class="nav-number">1.</span> <span class="nav-text">事件穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#click与300ms延迟"><span class="nav-number">1.1.</span> <span class="nav-text">click与300ms延迟</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自己的解决方案"><span class="nav-number">1.2.</span> <span class="nav-text">自己的解决方案</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

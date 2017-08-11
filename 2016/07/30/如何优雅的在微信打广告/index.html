@@ -106,7 +106,7 @@
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/IMG_3907.PNG">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/9C481708CA0BF54ADCA7D27EDC6FD561.jpg
 ">
-<meta property="og:updated_time" content="2017-04-08T01:14:37.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:08:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅的在微信打广告">
 <meta name="twitter:description" content="很久之前我的老师说过，他的朋友圈每天都有新款的bra，每天都像发现新大陆…..(此处省略一点点字)
@@ -479,9 +479,7 @@ $(function() {
 <div style="width:191px;margin:0 auto;padding-bottom:30px;margin-top:0px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/IMG_3882.PNG" alt="图片名称"><br></div>  
 
 <p>用一张笔者的自拍成功的占领了一次封面，换个思路，假若这是一张广告的图片呢（上面有各种各样的bra），现在大多数人都启用了微信运动（只要极个别的人怕打开了之后，每天去哪都被发现了），每天晚上十点，微信会推一条步数排行的信息给用户，我们弄点黑科技，修改下我们的步数，只要微信一推送，就相当于在给我们推广告</p>
-<p>###开始之前</p>
-<h2 id="在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包-非越狱-让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了"><a href="#在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包-非越狱-让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了" class="headerlink" title="在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包(非越狱))让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了"></a>在五月份的时候，微博上的一篇文章（<a href="http://www.jianshu.com/p/189afbe3b429" target="_blank" rel="external">一步一步实现iOS微信自动抢红包(非越狱)</a>)让我开始了解到逆向的世界，之后又开始知道了<a href="http://www.wooyun.org" target="_blank" rel="external">乌云网</a>（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了</h2><p>###砸壳</p>
-<p>我们从AppStore下载的app，其实都加密了，我们要修改微信的某些东西，必须先解密，俗称砸壳，此处有两种方法：</p>
+<h3 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h3><h2 id="在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包-非越狱-让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了"><a href="#在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包-非越狱-让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了" class="headerlink" title="在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包(非越狱))让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了"></a>在五月份的时候，微博上的一篇文章（<a href="http://www.jianshu.com/p/189afbe3b429" target="_blank" rel="external">一步一步实现iOS微信自动抢红包(非越狱)</a>)让我开始了解到逆向的世界，之后又开始知道了<a href="http://www.wooyun.org" target="_blank" rel="external">乌云网</a>（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了</h2><h3 id="砸壳"><a href="#砸壳" class="headerlink" title="砸壳"></a>砸壳</h3><p>我们从AppStore下载的app，其实都加密了，我们要修改微信的某些东西，必须先解密，俗称砸壳，此处有两种方法：</p>
 <ul>
 <li><p>从xx助手下载越狱应用（比如PP助手）<br>  下载完查看是否已经解密，查看cryptid这个标志位来判断app是否被加密。1代表加密了，0代表被解密了：</p>
 <blockquote>
@@ -523,7 +521,7 @@ cryptsize 43974656
 只有`armv7`架构是解密的，另一个`arm64`还是加密状态，此处我们需要抽出`armv7`架构，否则后面重签名安装后会闪退:  
 `lipo WeChat -thin armv7 -output WeChat_armv7`
 </code></pre><hr>
-<p>###重签名<br>我们最终的目的是给微信加上修改步数，抢红包的功能，但这一切的前提必须是，能够成功安装改版后的微信，并且成功打开，所以，我们并不急着给微信加功能，重签名这一步完成后，基本就没有什么大坑了</p>
+<h3 id="重签名"><a href="#重签名" class="headerlink" title="重签名"></a>重签名</h3><p>我们最终的目的是给微信加上修改步数，抢红包的功能，但这一切的前提必须是，能够成功安装改版后的微信，并且成功打开，所以，我们并不急着给微信加功能，重签名这一步完成后，基本就没有什么大坑了</p>
 <p>以下内容摘自<a href="http://www.jianshu.com/p/bfd4abd78f21" target="_blank" rel="external">分分钟让你在 微信运动 霸占榜首</a>  </p>
 <p>通过Xcode创建一个作为壳子的项目，要使用有开发权限的<code>bundle Id</code><br>任意取名，选好你的证书描述文件，然后编译。会生成一个<code>Mytest1.app</code></p>
 <div style="width:70%;margin:0 auto;padding-bottom:15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/e30a91e0-6cd4-4791-ba7b-c78ed29c824b.png"><br>    </div>  
@@ -556,8 +554,7 @@ cryptsize 43974656
 <p>打包:<br><code>xcrun -sdk iphoneos PackageApplication -v WeChat.app  -o ~/WeChat.ipa</code></p>
 <p>安装:<br>我使用pp助手安装，你也可以选择其他方式，若安装后成功打开微信，恭喜你，还差一步就成功了</p>
 <hr>
-<p>###注入新功能</p>
-<p>这里我整合了<a href="http://www.jianshu.com/p/189afbe3b429" target="_blank" rel="external">一步一步实现iOS微信自动抢红包(非越狱)</a>和<a href="http://www.jianshu.com/p/bfd4abd78f21" target="_blank" rel="external">分分钟让你在 微信运动 霸占榜首</a>  的代码：  </p>
+<h3 id="注入新功能"><a href="#注入新功能" class="headerlink" title="注入新功能"></a>注入新功能</h3><p>这里我整合了<a href="http://www.jianshu.com/p/189afbe3b429" target="_blank" rel="external">一步一步实现iOS微信自动抢红包(非越狱)</a>和<a href="http://www.jianshu.com/p/bfd4abd78f21" target="_blank" rel="external">分分钟让你在 微信运动 霸占榜首</a>  的代码：  </p>
 <pre><code>if ([m_nsContent rangeOfString:@&quot;打开红包插件&quot;].location != NSNotFound){
     HBPliginType = kOpenRedEnvPlugin;
 }
@@ -804,7 +801,7 @@ if (HBPliginType != kNothing) SAVESETTINGS(HBPliginTypeKey, [NSNumber numberWith
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包-非越狱-让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了"><span class="nav-number">1.</span> <span class="nav-text">在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包(非越狱))让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始之前"><span class="nav-number">1.</span> <span class="nav-text">开始之前</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包-非越狱-让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了"><span class="nav-number"></span> <span class="nav-text">在五月份的时候，微博上的一篇文章（一步一步实现iOS微信自动抢红包(非越狱))让我开始了解到逆向的世界，之后又开始知道了乌云网（可惜现在被停摆了），让我了解到，安全只是相对的，没有越狱的iphone，也是可以透露你的信息，期间，我试过几次给微信加入抢红包功能（非越狱），但是每次安装完成都是闪退，直到昨天，再次试了一下，终于成功了，站在巨人的肩膀上，很多事都会简单多了</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#砸壳"><span class="nav-number">1.</span> <span class="nav-text">砸壳</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重签名"><span class="nav-number">2.</span> <span class="nav-text">重签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入新功能"><span class="nav-number">3.</span> <span class="nav-text">注入新功能</span></a></li></ol></div>
             
 
           </div>

@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="蔡锐炜的小黑屋">
 <meta property="og:description" content="最近公司在研究跨平台开发，期间接触了wex5，DCloud，还有React Native（以下简称RN）">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutD03A9374-C7D5-47BD-ABEF-F5B41F16C4C7.png">
-<meta property="og:updated_time" content="2017-04-08T01:17:13.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:12:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React Native 初接触">
 <meta name="twitter:description" content="最近公司在研究跨平台开发，期间接触了wex5，DCloud，还有React Native（以下简称RN）">
@@ -459,12 +459,10 @@ $(function() {
       
         <p>最近公司在研究跨平台开发，期间接触了<a href="http://www.wex5.com" target="_blank" rel="external">wex5</a>，<a href="http://dcloud.io" target="_blank" rel="external">DCloud</a>，还有<a href="https://github.com/facebook/react-native" target="_blank" rel="external">React Native</a>（以下简称RN）</p>
 <a id="more"></a>
-<p>#三种工具的体会（以下谨为个人观点）</p>
-<p>##DCloud<br>需要懂得<code>html</code>，<code>css</code>,可以将做出来的h5打包到iOS模拟器和android模拟器，之前也写过一篇关于将项目跑到三端的文章（<a href="http://corz.info/hbuilderchu-shi-zai-ioshe-androidshang-an-zhuang-wo-men-de-demo/" target="_blank" rel="external">HBuilder初试，在iOS和android上安装我们的demo</a>），使用简单，有提供了一套UI框架，不强制使用，想学h5跨平台开发还是比较推荐这个</p>
-<p>##wex5<br>开发工具是用<code>eclipse</code>改造而来，提供了<code>android</code>和<code>iOS</code>类似的可视化开发界面，支持拖拉控件布局，能够方便的设置属性，给我的感觉就是一个框架，一个别人封装好的框架，你可以使用可视化布局帮你完成<code>div</code>+<code>css</code>的转化，但是，对于我原本不是做网页前端的开发人员来说，我还是有点抵触的，毕竟你这个学完了，要是哪天出了个别的 xxxx 什么跨平台框架，又得重新学，还不如使用<code>DCloud</code>，从最基础的自己写起，也算学多一门技能</p>
-<p>##RN<br>给我的感觉是要写一套代码，然后复制两份，因为分为<strong>iOS</strong>和<strong>android</strong>，<code>init</code>工程之后，项目下也有<code>index.ios.js</code>和<code>index.android.js</code>两份，打开看，两份代码是一样的，但是<strong>iOS</strong>和<strong>android</strong>有一些控件还是不一样的，<strong>RN</strong>这样做的好处是为了当使用一些<strong>原生组件</strong>的时候更好的区分，当然我们也可以将代码写在同一份js文件里面，然后判断运行的平台执行不同的代码，不过这样可能会增加阅读难度</p>
-<p>#RN环境搭建</p>
-<ol>
+<h1 id="三种工具的体会（以下谨为个人观点）"><a href="#三种工具的体会（以下谨为个人观点）" class="headerlink" title="三种工具的体会（以下谨为个人观点）"></a>三种工具的体会（以下谨为个人观点）</h1><h2 id="DCloud"><a href="#DCloud" class="headerlink" title="DCloud"></a>DCloud</h2><p>需要懂得<code>html</code>，<code>css</code>,可以将做出来的h5打包到iOS模拟器和android模拟器，之前也写过一篇关于将项目跑到三端的文章（<a href="http://corz.info/hbuilderchu-shi-zai-ioshe-androidshang-an-zhuang-wo-men-de-demo/" target="_blank" rel="external">HBuilder初试，在iOS和android上安装我们的demo</a>），使用简单，有提供了一套UI框架，不强制使用，想学h5跨平台开发还是比较推荐这个</p>
+<h2 id="wex5"><a href="#wex5" class="headerlink" title="wex5"></a>wex5</h2><p>开发工具是用<code>eclipse</code>改造而来，提供了<code>android</code>和<code>iOS</code>类似的可视化开发界面，支持拖拉控件布局，能够方便的设置属性，给我的感觉就是一个框架，一个别人封装好的框架，你可以使用可视化布局帮你完成<code>div</code>+<code>css</code>的转化，但是，对于我原本不是做网页前端的开发人员来说，我还是有点抵触的，毕竟你这个学完了，要是哪天出了个别的 xxxx 什么跨平台框架，又得重新学，还不如使用<code>DCloud</code>，从最基础的自己写起，也算学多一门技能</p>
+<h2 id="RN"><a href="#RN" class="headerlink" title="RN"></a>RN</h2><p>给我的感觉是要写一套代码，然后复制两份，因为分为<strong>iOS</strong>和<strong>android</strong>，<code>init</code>工程之后，项目下也有<code>index.ios.js</code>和<code>index.android.js</code>两份，打开看，两份代码是一样的，但是<strong>iOS</strong>和<strong>android</strong>有一些控件还是不一样的，<strong>RN</strong>这样做的好处是为了当使用一些<strong>原生组件</strong>的时候更好的区分，当然我们也可以将代码写在同一份js文件里面，然后判断运行的平台执行不同的代码，不过这样可能会增加阅读难度</p>
+<h1 id="RN环境搭建"><a href="#RN环境搭建" class="headerlink" title="RN环境搭建"></a>RN环境搭建</h1><ol>
 <li><p><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a>  </p>
 <p> <a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a> 是 Mac 中的一个包管理器，没有安装的话，<a href="http://brew.sh/" target="_blank" rel="external">点击这里安装</a> 我的版本如下:</p>
 <blockquote>
@@ -505,7 +503,7 @@ $(function() {
 </blockquote>
 </li>
 </ol>
-<p>##RN安装<br>通过 <strong>npm</strong> 安装即可：</p>
+<h2 id="RN安装"><a href="#RN安装" class="headerlink" title="RN安装"></a>RN安装</h2><p>通过 <strong>npm</strong> 安装即可：</p>
 <blockquote>
 <p>npm install -g react-native-cli</p>
 </blockquote>
@@ -513,11 +511,8 @@ $(function() {
 <blockquote>
 <p>sudo npm install -g react-native-cli</p>
 </blockquote>
-<p>##APP 开发环境的设置</p>
-<p>###iOS</p>
-<p>XCode 6.3 及其以上即可。</p>
-<p>###Android</p>
-<p>这个比较麻烦。</p>
+<h2 id="APP-开发环境的设置"><a href="#APP-开发环境的设置" class="headerlink" title="APP 开发环境的设置"></a>APP 开发环境的设置</h2><h3 id="iOS"><a href="#iOS" class="headerlink" title="iOS"></a>iOS</h3><p>XCode 6.3 及其以上即可。</p>
+<h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>这个比较麻烦。</p>
 <ul>
 <li><p>设置环境变量：<code>ANDROID_HOME</code></p>
 <blockquote>
@@ -530,9 +525,7 @@ $(function() {
 <p>  <code>Android Support Repository</code></p>
 </li>
 </ul>
-<p>##HelloRN</p>
-<p>###新建项目</p>
-<blockquote>
+<h2 id="HelloRN"><a href="#HelloRN" class="headerlink" title="HelloRN"></a>HelloRN</h2><h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><blockquote>
 <p>react-native init HelloRN</p>
 </blockquote>
 <p>创建新项目，<code>react-native init HelloRN</code>命令长时间无响应，或报错<code>shasum check failed</code>，由于众所周知的网络原因，<code>react-native</code>命令行从<strong>npm</strong>官方源拖代码时会遇上麻烦。请将<strong>npm</strong>仓库源替换为国内镜像：</p>
@@ -571,10 +564,8 @@ $(function() {
 </ul>
 </li>
 </ul>
-<p>##支持Web</p>
-<p><strong>RN</strong>只支持<code>iOS</code>和<code>android</code>，他的口号是“Learn Once，Write AnyWhere”，而并不是我们所谓的”Write Once,Run AnyWhere”，不过我们可以使用<a href="https://github.com/taobaofed/react-web/blob/master/README-zh.md" target="_blank" rel="external">react-web</a>，让我们的<strong>RN</strong>支持<strong>Web</strong></p>
-<p>###安装 React web</p>
-<p>安装React web</p>
+<h2 id="支持Web"><a href="#支持Web" class="headerlink" title="支持Web"></a>支持Web</h2><p><strong>RN</strong>只支持<code>iOS</code>和<code>android</code>，他的口号是“Learn Once，Write AnyWhere”，而并不是我们所谓的”Write Once,Run AnyWhere”，不过我们可以使用<a href="https://github.com/taobaofed/react-web/blob/master/README-zh.md" target="_blank" rel="external">react-web</a>，让我们的<strong>RN</strong>支持<strong>Web</strong></p>
+<h3 id="安装-React-web"><a href="#安装-React-web" class="headerlink" title="安装 React web"></a>安装 React web</h3><p>安装React web</p>
 <blockquote>
 <p>npm install react-web-cli -g  </p>
 </blockquote>
@@ -584,7 +575,7 @@ $(function() {
 </blockquote>
 <p>执行完成之后，会在你项目目录下面<code>npm install</code> 相关库，并自动创建<code>web/webpack.config.js</code>文件，里面有一份写好的配置。此时目录结构为：</p>
 <p>├── README.md<br>├── android/<br>├── index.android.js<br>├── index.ios.js<br>├── ios/<br>├── package.json<br>└── web/<br>—└── webpack.config.js</p>
-<p>###React web 相关配置<br>每个项目都需要有一个入口文件，通常用来引入调用其他组件并初始化项目，比如<code>index.ios.js</code> 表示 <strong>iOS</strong> 平台上的该项目的入口文件。为了符合 <strong>React Native</strong> 的文件命名规范，我们创建一个 <code>index.web.js</code> 作为入口文件，并且需要在 <code>webpack</code> 中指定该文件为入口文件。打开 <code>web/webpack.config.js</code> 文件，修改 <code>config</code> 变量：</p>
+<h3 id="React-web-相关配置"><a href="#React-web-相关配置" class="headerlink" title="React web 相关配置"></a>React web 相关配置</h3><p>每个项目都需要有一个入口文件，通常用来引入调用其他组件并初始化项目，比如<code>index.ios.js</code> 表示 <strong>iOS</strong> 平台上的该项目的入口文件。为了符合 <strong>React Native</strong> 的文件命名规范，我们创建一个 <code>index.web.js</code> 作为入口文件，并且需要在 <code>webpack</code> 中指定该文件为入口文件。打开 <code>web/webpack.config.js</code> 文件，修改 <code>config</code> 变量：</p>
 <pre><code>var config = {
   paths: {
     src: path.join(ROOT_PATH, &apos;.&apos;),
@@ -805,7 +796,7 @@ if (Platform.OS == &apos;web&apos;) {
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行项目"><span class="nav-number">1.</span> <span class="nav-text">运行项目</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三种工具的体会（以下谨为个人观点）"><span class="nav-number">1.</span> <span class="nav-text">三种工具的体会（以下谨为个人观点）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#DCloud"><span class="nav-number">1.1.</span> <span class="nav-text">DCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wex5"><span class="nav-number">1.2.</span> <span class="nav-text">wex5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RN"><span class="nav-number">1.3.</span> <span class="nav-text">RN</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RN环境搭建"><span class="nav-number">2.</span> <span class="nav-text">RN环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#RN安装"><span class="nav-number">2.1.</span> <span class="nav-text">RN安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APP-开发环境的设置"><span class="nav-number">2.2.</span> <span class="nav-text">APP 开发环境的设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS"><span class="nav-number">2.2.1.</span> <span class="nav-text">iOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android"><span class="nav-number">2.2.2.</span> <span class="nav-text">Android</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HelloRN"><span class="nav-number">2.3.</span> <span class="nav-text">HelloRN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新建项目"><span class="nav-number">2.3.1.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行项目"><span class="nav-number">2.3.2.</span> <span class="nav-text">运行项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持Web"><span class="nav-number">2.4.</span> <span class="nav-text">支持Web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-React-web"><span class="nav-number">2.4.1.</span> <span class="nav-text">安装 React web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-web-相关配置"><span class="nav-number">2.4.2.</span> <span class="nav-text">React web 相关配置</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

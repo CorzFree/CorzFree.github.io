@@ -87,7 +87,7 @@
 
 
 
-<meta name="description" content="####不规则图片点击识别众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  
+<meta name="description" content="不规则图片点击识别众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  
   
 找不到美女，找到了一头狼  
 嗯，可以移动了，可是，图片是矩形的，点击矩形的透明区域，图片也跟着移动了，在用户眼中，他们才不管你的是矩形圆形，他们要的是效果：">
@@ -95,7 +95,7 @@
 <meta property="og:title" content="web 不规则图片拖动">
 <meta property="og:url" content="http://yoursite.com/2016/09/20/web-不规则图片拖动/index.html">
 <meta property="og:site_name" content="蔡锐炜的小黑屋">
-<meta property="og:description" content="####不规则图片点击识别众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  
+<meta property="og:description" content="不规则图片点击识别众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  
   
 找不到美女，找到了一头狼  
 嗯，可以移动了，可是，图片是矩形的，点击矩形的透明区域，图片也跟着移动了，在用户眼中，他们才不管你的是矩形圆形，他们要的是效果：">
@@ -112,10 +112,10 @@
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/20160912-12.png">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/20160912-13.gif">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/20160912-14.gif">
-<meta property="og:updated_time" content="2017-04-08T01:17:32.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:13:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="web 不规则图片拖动">
-<meta name="twitter:description" content="####不规则图片点击识别众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  
+<meta name="twitter:description" content="不规则图片点击识别众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  
   
 找不到美女，找到了一头狼  
 嗯，可以移动了，可是，图片是矩形的，点击矩形的透明区域，图片也跟着移动了，在用户眼中，他们才不管你的是矩形圆形，他们要的是效果：">
@@ -478,7 +478,7 @@ $(function() {
       
 
       
-        <p>####<strong>不规则图片点击识别</strong><br>众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  </p>
+        <h4 id="不规则图片点击识别"><a href="#不规则图片点击识别" class="headerlink" title="不规则图片点击识别"></a><strong>不规则图片点击识别</strong></h4><p>众所周知，图片都是矩形的，但是有些图片是一个美女，一只猫or狗，这时候，我们希望可以把美女，带到我们的黄金屋去，噼里啪啦，搞定！  </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-3.gif" alt="enter image description here">  </p>
 <p>找不到美女，找到了一头狼  </p>
 <p>嗯，可以移动了，可是，图片是矩形的，点击矩形的透明区域，图片也跟着移动了，在用户眼中，他们才不管你的是矩形圆形，他们要的是效果：   </p>
@@ -528,8 +528,7 @@ this.myctx.needMove = alpha &gt; 0;
             break;
     }
 }
-</code></pre><p>####<strong>图片的重叠问题</strong>  </p>
-<p> <img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-5.gif" alt="enter image description here">    </p>
+</code></pre><h4 id="图片的重叠问题"><a href="#图片的重叠问题" class="headerlink" title="图片的重叠问题"></a><strong>图片的重叠问题</strong></h4><p> <img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-5.gif" alt="enter image description here">    </p>
 <p> 当界面上的<strong>不规则图形 &gt; 1</strong> 的时候，以上图为例，我们想要拖动在狼后面的羊，由于有一部分被狼图片的透明部分所挡住，当我们想要拖动羊而恰好拖动的触摸点在这部分的范围内时，是无法拖动后面的羊，当然，你可以这么做：  </p>
 <ul>
 <li>整体使用一个<code>canvas</code>，记录每个图片的信息，然后不断的重绘，遇到羊和狼重叠的部分，需要先判断是否点击处的坐标是否是在狼身上，还是在狼的透明区域上，若在透明区域上，需要再判断是在羊身上，还是在羊透明区域上，若在羊身上，移动羊  </li>
@@ -537,10 +536,8 @@ this.myctx.needMove = alpha &gt; 0;
 </ul>
 <p><strong>该部分代码见<a href="https://github.com/CorzFree/Web_PicDemo" target="_blank" rel="external">demo</a>（index-canvas.html)</strong>  </p>
 <hr>
-<p>####<strong>使用动画库<a href="http://jindo.dev.naver.com/collie/index.html#documentation" target="_blank" rel="external">collie</a></strong></p>
-<p><code>collie</code>是一个 JavaScript 库，用于为移动平台创建优化的动画和游戏</p>
-<p>#####<strong>使用collie加载一只狼</strong></p>
-<pre><code>oLayer = new collie.Layer({
+<h4 id="使用动画库collie"><a href="#使用动画库collie" class="headerlink" title="使用动画库collie"></a><strong>使用动画库<a href="http://jindo.dev.naver.com/collie/index.html#documentation" target="_blank" rel="external">collie</a></strong></h4><p><code>collie</code>是一个 JavaScript 库，用于为移动平台创建优化的动画和游戏</p>
+<h5 id="使用collie加载一只狼"><a href="#使用collie加载一只狼" class="headerlink" title="使用collie加载一只狼"></a><strong>使用collie加载一只狼</strong></h5><pre><code>oLayer = new collie.Layer({
     width: clientWidth,
     height: clientHeight
 }); 
@@ -574,8 +571,7 @@ new collie.DisplayObject({
 </code></pre><p>1.任何一个元素都有一个中心点，默认情况之下，其中心点是居于元素X轴和Y轴的50%处，不改变该点情况下，进行的旋转、位移、缩放，扭曲等操作都是以元素自己中心位置进行变形，此处将该点改为左上角，效果见下图</p>
 <div style="width:70%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-8.jpg"><br></div>   
 
-<p>#####<strong>让狼动起来</strong></p>
-<pre><code>new collie.DisplayObject({
+<h5 id="让狼动起来"><a href="#让狼动起来" class="headerlink" title="让狼动起来"></a><strong>让狼动起来</strong></h5><pre><code>new collie.DisplayObject({
         width: 302,
         height: 316,
         x: 0,
@@ -622,7 +618,7 @@ new collie.DisplayObject({
 </code></pre><p>1.设置图片对象响应事件<br>2.记录鼠标按下时的坐标，当前图片的x，y<br>3.根据上一步记录的坐标和当前的坐标的差值，可以知道移动了多少，相应的让图片也移动这个差值，实现拖动效果  </p>
 <div style="width:191px;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-8.gif"><br></div>   
 
-<p>#####<strong>区域拖动</strong><br>狼的拖动已经实现了，但是又回到了一开始的问题，不规则点击识别，<code>collie</code>已经给我们考虑到了，<code>collie.DisplayObject</code>有一个参数<code>hitArea</code>，官方文档:    </p>
+<h5 id="区域拖动"><a href="#区域拖动" class="headerlink" title="区域拖动"></a><strong>区域拖动</strong></h5><p>狼的拖动已经实现了，但是又回到了一开始的问题，不规则点击识别，<code>collie</code>已经给我们考虑到了，<code>collie.DisplayObject</code>有一个参数<code>hitArea</code>，官方文档:    </p>
 <div style="width:70%;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-11.png"><br></div>   
 
 
@@ -649,8 +645,7 @@ rangeY: [0, clientHeight - sizes[i][1] * scale],
 
 
 <p>设置了范围之后，可以防止超出黄色区域  </p>
-<p>#####<strong>加多点动物</strong>    </p>
-<div style="width:191px;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-14.gif"><br></div>   
+<h5 id="加多点动物"><a href="#加多点动物" class="headerlink" title="加多点动物"></a><strong>加多点动物</strong></h5><div style="width:191px;margin:0 auto;padding-bottom:15px;margin-top:-15px;"><br><img src="http://7xrlno.com1.z0.glb.clouddn.com/20160912-14.gif"><br></div>   
 
 
 <p>这里在按下事件中，将选中的<code>displayObject</code>移除，重新添加，实现了被选中的动物移动最前面：</p>
@@ -774,8 +769,17 @@ rangeY: [0, clientHeight - sizes[i][1] * scale],
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -857,6 +861,22 @@ rangeY: [0, clientHeight - sizes[i][1] * scale],
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#不规则图片点击识别"><span class="nav-number">1.</span> <span class="nav-text">不规则图片点击识别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片的重叠问题"><span class="nav-number">2.</span> <span class="nav-text">图片的重叠问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用动画库collie"><span class="nav-number">3.</span> <span class="nav-text">使用动画库collie</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用collie加载一只狼"><span class="nav-number">3.1.</span> <span class="nav-text">使用collie加载一只狼</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#让狼动起来"><span class="nav-number">3.2.</span> <span class="nav-text">让狼动起来</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#区域拖动"><span class="nav-number">3.3.</span> <span class="nav-text">区域拖动</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加多点动物"><span class="nav-number">3.4.</span> <span class="nav-text">加多点动物</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -100,7 +100,7 @@
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout201606201600.gif">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutE715C4D1-6DB5-44C9-98B1-B789ED2B5AFF.png">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout201606201600-02.gif">
-<meta property="og:updated_time" content="2017-04-08T01:15:53.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:09:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="淘宝商品列表页样式切换(CollectionView)">
 <meta name="twitter:description" content="淘宝的搜索出来的商品列表可以切换样式，下面是在一个pdf的demo里面模仿了淘宝的这个功能，点一下左上角的change style，界面由三列变成单列，你可以使用一个tableView+collectionView实现，当然，这是比较费力的办法，我们这次，只用collectionView来实现这个效果，姿势用的好，没有xxx推不倒">
@@ -469,15 +469,14 @@ $(function() {
 <p>众所周知，<code>collectionView</code>可以自定义布局来实现<strong>圆形布局</strong>，<strong>瀑布流布局</strong>，对于这个效果，我们直接使用官方提供的<code>uicollectionviewflowlayout</code>，<code>uicollectionviewflowlayout</code>如同其名，在每一行，一个接一个排列，当所剩的位置不足以容下一个新的<code>cell</code>的时候，另起一行，所以，对于<strong>一列</strong>的情况，我们可以将<code>cell</code>的宽度设置为等于<strong>collectionView的宽度</strong>，这样每行只有一个<code>cell</code>，效果就和<code>tableView</code>一样；对于<strong>多列</strong>的情况，只要控制好<code>cell</code>的宽度，也可以轻松实现，<strong><code>关键在cell的size控制，cell的size又由layout的size所决定</code></strong>，所以核心操作都在</p>
 <pre><code>- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath  
 </code></pre><hr>
-<p>##<strong>Just do it</strong></p>
-<p>新建一个项目，在SB里面放入一个<code>collectionView</code>，再拖入一个<code>collectionViewCell</code>，修改样式如下:    </p>
+<h2 id="Just-do-it"><a href="#Just-do-it" class="headerlink" title="Just do it"></a><strong>Just do it</strong></h2><p>新建一个项目，在SB里面放入一个<code>collectionView</code>，再拖入一个<code>collectionViewCell</code>，修改样式如下:    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayoutB6EAC204-6AE7-436F-AEDB-F0949FF8EC1D.png" alt="enter image description here">  </p>
 <p>选中<code>collectionView</code>，在右边的属性栏将<code>items</code>改为<code>2</code>:  </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout82869FDE-3CA8-4B78-ADC8-7A5B2F5D4A5A.png" alt="enter image description here"></p>
 <p>这时，<code>collectionView</code>中多了一个<code>cell</code>，我们将另一个的样式修改，最终在SB中的效果如下:    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout69B5DD0C-4358-4F01-A64B-7A57E8C8EC4A.png" alt="enter image description here"></p>
 <p>nice，我们已经完成了ui的部份，接下来，我们需要新建<code>OneColumCell</code>和<code>MulColumCell</code>对应我们在SB中的两个<code>cell</code>，这里只贴出<code>.m</code>的代码:  </p>
-<p><strong>OneColumCell.m</strong></p>
+<p><strong> OneColumCell.m</strong></p>
 <pre><code>#import &quot;OneColumCell.h&quot;
 #import &quot;ProductInfoModel.h&quot;
 
@@ -508,7 +507,7 @@ $(function() {
 }
 
 @end
-</code></pre><p><strong>MulColumCell.m</strong></p>
+</code></pre><p><strong> MulColumCell.m</strong></p>
 <pre><code>#import &quot;MulColumCell.h&quot;
 #import &quot;ProductInfoModel.h&quot;
 
@@ -672,8 +671,17 @@ $(function() {
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -755,6 +763,22 @@ $(function() {
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Just-do-it"><span class="nav-number">1.</span> <span class="nav-text">Just do it</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

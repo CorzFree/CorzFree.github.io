@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160420.gif">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160420_1.gif">
 <meta property="og:image" content="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayout3.pic.jpg">
-<meta property="og:updated_time" content="2017-04-08T01:16:17.000Z">
+<meta property="og:updated_time" content="2017-08-11T23:10:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个iOS7的bug引发的关于cell的事件处理">
 <meta name="twitter:description" content="中午的时候，测试人员上报了一个在iOS7的bug，">
@@ -505,8 +505,7 @@ AfternoonTeaShopCell *superCell = (AfternoonTeaShopCell *)view;
 </code></pre><p>总算解决了bug，但是一切的源头还是由于我换了另一种方法去操作，并且考虑不周。</p>
 <p>给UITableViewCell的按钮添加事件有三种方法：    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost%2Fblog%2Fcustomcirclelayout22321sadsjkaskdgakuj.jpg" alt="enter image description here"></p>
-<p>##Tag方式</p>
-<p> 通过给<code>button</code>设置<code>tag</code>，一般设置为<code>indexPath.row</code>  </p>
+<h2 id="Tag方式"><a href="#Tag方式" class="headerlink" title="Tag方式"></a>Tag方式</h2><p> 通过给<code>button</code>设置<code>tag</code>，一般设置为<code>indexPath.row</code>  </p>
 <pre><code>[cell.delBtn addTarget:self action:@selector(delItem:) forControlEvents:UIControlEventTouchUpInside];
 cell.delBtn.tag = indexPath.row;  
 </code></pre><p>然后，在点击事件<code>delItem</code>中：  </p>
@@ -525,8 +524,7 @@ cell.delBtn.tag = indexPath.row;
 </code></pre><p>运行:    </p>
 <p><img src="http://7xrlno.com1.z0.glb.clouddn.com/ghost/blog/customcirclelayouttag_20160420_1.gif" alt="enter image description here">  </p>
 <p>一切正常，就是没有了删除动画，聪明的你应该已经知道答案了吧。</p>
-<p>####当我们使用<code>deleteRowsAtIndexPaths</code>方法时：  </p>
-<ol>
+<h4 id="当我们使用deleteRowsAtIndexPaths方法时："><a href="#当我们使用deleteRowsAtIndexPaths方法时：" class="headerlink" title="当我们使用deleteRowsAtIndexPaths方法时："></a>当我们使用<code>deleteRowsAtIndexPaths</code>方法时：</h4><ol>
 <li>首先删除了第0行，这时候之前的第一行(title-&gt;1)成为了现在的第0行</li>
 <li>当我们点击第0行(title-&gt;1)这行的删除按钮时，这时候我们需要的是删除第0行的数据，但是要注意一点，我们在<code>cellForRowAtIndexPath</code>给<code>button</code> 设置的<code>tag</code>就是当前的行数，而我们调用的<code>deleteRowsAtIndexPaths</code>方法是不会调<code>cellForRowAtIndexPath</code>的，所以，我们删除了(title-&gt;0)这行之后，我们当前的(title-&gt;1)的<code>tag</code>还是1，而非我们想要的0，所以，这里会把(title-&gt;1)下面那行删除掉</li>
 <li><p>当我们点击最后一行的时候，crash，我们看一张图:  </p>
@@ -534,8 +532,8 @@ cell.delBtn.tag = indexPath.row;
 <p>此时数据源(dataArray)的<code>count</code>是7，但是我们的<code>index</code>却是9，所以是由数组越界引起的crash.  </p>
 </li>
 </ol>
-<p>####当我们使用<code>reloadData</code>时<br>   因为每次删除操作之后都调用了<code>cellForRowAtIndexPath</code>，所以保证了<code>button.tag</code>的值是最新的，所以可以正常运行，但是对于删除的操作就显得突兀，没有过渡动画.  </p>
-<p>##Cell.superview方式<br>使用这种方式，我们不需要给<code>button</code>设置<code>tag</code>，下面是代码:  </p>
+<h4 id="当我们使用reloadData时"><a href="#当我们使用reloadData时" class="headerlink" title="当我们使用reloadData时"></a>当我们使用<code>reloadData</code>时</h4><p>   因为每次删除操作之后都调用了<code>cellForRowAtIndexPath</code>，所以保证了<code>button.tag</code>的值是最新的，所以可以正常运行，但是对于删除的操作就显得突兀，没有过渡动画.  </p>
+<h2 id="Cell-superview方式"><a href="#Cell-superview方式" class="headerlink" title="Cell.superview方式"></a>Cell.superview方式</h2><p>使用这种方式，我们不需要给<code>button</code>设置<code>tag</code>，下面是代码:  </p>
 <pre><code>- (void)delItem:(UIButton *)btn{
 
     UIView *view = btn;
@@ -549,8 +547,7 @@ cell.delBtn.tag = indexPath.row;
     [self.dataArray removeObjectAtIndex:indexPath.row];
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];  
 }   
-</code></pre><p>##delegate方式  </p>
-<p> 通过<code>delegate</code>的方式，将<code>button</code>的点击事件回传.  </p>
+</code></pre><h2 id="delegate方式"><a href="#delegate方式" class="headerlink" title="delegate方式"></a>delegate方式</h2><p> 通过<code>delegate</code>的方式，将<code>button</code>的点击事件回传.  </p>
 <p>   delegate: </p>
 <pre><code>@protocol CellDelegate &lt;NSObject&gt; 
 
@@ -677,8 +674,17 @@ cell.delBtn.tag = indexPath.row;
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -760,6 +766,22 @@ cell.delBtn.tag = indexPath.row;
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tag方式"><span class="nav-number">1.</span> <span class="nav-text">Tag方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#当我们使用deleteRowsAtIndexPaths方法时："><span class="nav-number">1.0.1.</span> <span class="nav-text">当我们使用deleteRowsAtIndexPaths方法时：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#当我们使用reloadData时"><span class="nav-number">1.0.2.</span> <span class="nav-text">当我们使用reloadData时</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cell-superview方式"><span class="nav-number">2.</span> <span class="nav-text">Cell.superview方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delegate方式"><span class="nav-number">3.</span> <span class="nav-text">delegate方式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
